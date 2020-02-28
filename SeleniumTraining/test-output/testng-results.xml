@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="SDET TEST" duration-ms="14204" started-at="2020-02-28T15:44:13 ICT" finished-at="2020-02-28T15:44:27 ICT">
+    <groups>
+    </groups>
+    <test name="Test1 - Home page" duration-ms="9550" started-at="2020-02-28T15:44:13 ICT" finished-at="2020-02-28T15:44:22 ICT">
+      <class name="smoketests.ATagsTest">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:smoketests.ATagsTest@3108bc]" name="setUp" is-config="true" duration-ms="4938" started-at="2020-02-28T15:44:13 ICT" finished-at="2020-02-28T15:44:18 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="loginElementsPresentTest()[pri:0, instance:smoketests.ATagsTest@3108bc]" name="loginElementsPresentTest" duration-ms="145" started-at="2020-02-28T15:44:18 ICT" finished-at="2020-02-28T15:44:18 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginElementsPresentTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:smoketests.ATagsTest@3108bc]" name="tearDown" is-config="true" duration-ms="58" started-at="2020-02-28T15:44:18 ICT" finished-at="2020-02-28T15:44:18 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- smoketests.ATagsTest -->
+      <class name="smoketests.loginPresentTestNG">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:smoketests.loginPresentTestNG@370736d9]" name="setUp" is-config="true" duration-ms="4102" started-at="2020-02-28T15:44:18 ICT" finished-at="2020-02-28T15:44:22 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="loginElementsPresentTest()[pri:0, instance:smoketests.loginPresentTestNG@370736d9]" name="loginElementsPresentTest" duration-ms="154" started-at="2020-02-28T15:44:22 ICT" finished-at="2020-02-28T15:44:22 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginElementsPresentTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:smoketests.loginPresentTestNG@370736d9]" name="tearDown" is-config="true" duration-ms="73" started-at="2020-02-28T15:44:22 ICT" finished-at="2020-02-28T15:44:22 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- smoketests.loginPresentTestNG -->
+    </test> <!-- Test1 - Home page -->
+    <test name="Test2 - login" duration-ms="4603" started-at="2020-02-28T15:44:22 ICT" finished-at="2020-02-28T15:44:27 ICT">
+      <class name="smoketests.loginPresentTestNG">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:smoketests.loginPresentTestNG@3dd4520b]" name="setUp" is-config="true" duration-ms="4299" started-at="2020-02-28T15:44:22 ICT" finished-at="2020-02-28T15:44:26 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="loginElementsPresentTest()[pri:0, instance:smoketests.loginPresentTestNG@3dd4520b]" name="loginElementsPresentTest" duration-ms="126" started-at="2020-02-28T15:44:26 ICT" finished-at="2020-02-28T15:44:27 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginElementsPresentTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:smoketests.loginPresentTestNG@3dd4520b]" name="tearDown" is-config="true" duration-ms="174" started-at="2020-02-28T15:44:27 ICT" finished-at="2020-02-28T15:44:27 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- smoketests.loginPresentTestNG -->
+    </test> <!-- Test2 - login -->
+  </suite> <!-- SDET TEST -->
+</testng-results>
