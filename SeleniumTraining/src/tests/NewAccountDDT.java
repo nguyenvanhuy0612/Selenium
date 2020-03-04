@@ -15,11 +15,18 @@ public class NewAccountDDT {
 	String gender;
 	String password;
 	String country;
+	String weeklyEmail;
+	String monthlyEmail;
+	String occasionalEmail;
+	int i = 0;
 
 	@Test
 	public void NewAccountTest() {
-		System.out.println(
-				"NEW RECORD: " + name + " " + email + " " + phone + " " + gender + " " + password + " " + country);
+		System.out.println("NEW RECORD: " + name + " " + email + " " + phone + " " + gender + " " + password + " "
+				+ country + " " + weeklyEmail + " " + monthlyEmail + " " + occasionalEmail);
+		System.out.println("===================================================== " + i);
+		i++;
+		System.out.println(i);
 	}
 
 	@Parameters
@@ -39,5 +46,8 @@ public class NewAccountDDT {
 		this.gender = gender;
 		this.password = password;
 		this.country = country;
+		this.weeklyEmail = weeklyEmail;
+		this.monthlyEmail = monthlyEmail;
+		this.occasionalEmail = occasionalEmail;
 	}
 }
