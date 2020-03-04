@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CSV {
 	// This method will read and return data from a CSV file
-	public static List<String[]>	get(String filename){
+	public static List<String[]> get(String filename) {
 		List<String[]> data = new ArrayList<String[]>();
 		String testRow;
 		try {
@@ -22,11 +22,9 @@ public class CSV {
 				String[] line = testRow.split(",");
 				data.add(line);
 			}
-		}
-		catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			System.out.println("Error: File not found " + filename);
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			System.out.println("Error: Could not read " + filename);
 		}
 		return data;

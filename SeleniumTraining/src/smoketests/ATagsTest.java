@@ -12,17 +12,17 @@ import org.testng.annotations.Test;
 
 public class ATagsTest {
 	WebDriver driver;
-	
+
 	@Test
 	public void loginElementsPresentTest() {
 		System.out.println("Running test");
-		
+
 		boolean createAccountpresent = false;
-		List <WebElement> aElements = driver.findElements(By.tagName("a"));
-		
+		List<WebElement> aElements = driver.findElements(By.tagName("a"));
+
 		int numberOfAElements = aElements.size();
-		System.out.println("There are "+ numberOfAElements + " a tags on the page");
-		
+		System.out.println("There are " + numberOfAElements + " a tags on the page");
+
 		for (WebElement aElement : aElements) {
 			System.out.println(aElement.getText());
 			if (aElement.getText().equals("CREATE ACCOUNT")) {
@@ -30,8 +30,8 @@ public class ATagsTest {
 				break;
 			}
 		}
-		
-		//Assertion
+
+		// Assertion
 		Assert.assertTrue(createAccountpresent);
 	}
 

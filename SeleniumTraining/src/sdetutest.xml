@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="SDET TEST" parallel="false">
 
-  <test name="Test1 - Home page">
-    <classes>
-      <class name="smoketests.ATagsTest"/>
-      <class name="smoketests.loginPresentTestNG"/>
-    </classes>
-  </test> <!-- Test -->
-  
-  <test name="Test2 - login">
-    <classes>
-      <class name="smoketests.loginPresentTestNG"/>
-    </classes>
-  </test> <!-- Test -->
-  
+	<test name="Test1 - Home page">
+		<classes>
+			<class name="smoketests.ATagsTest" />
+			<class name="smoketests.loginPresentTestNG" />
+		</classes>
+	</test> <!-- Test -->
+
+	<test name="Test2 - login">
+		<classes>
+			<class name="smoketests.loginPresentTestNG" />
+		</classes>
+	</test> <!-- Test -->
+
 </suite> <!-- Suite -->

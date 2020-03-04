@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class loginPresentTestNG {
 	WebDriver driver;
-	
+
 	@Test
 	public void loginElementsPresentTest() {
 		System.out.println("Running test");
@@ -17,16 +17,17 @@ public class loginPresentTestNG {
 		boolean passwordBox = driver.findElement(By.id("MainContent_txtUserName")).isDisplayed();
 		Assert.assertTrue(loginEmailBox, "Email textbox present");
 		Assert.assertTrue(passwordBox, "Password textbox present");
-		
 	}
+
 	@BeforeMethod
 	public void setUp() {
 		System.out.println("Starting test");
 		driver = utilities.DriverFactory.CreateDriver("chrome");
-		
-		String webURL ="http://sdettraining.com/trguitransactions/AccountManagement.aspx";
+
+		String webURL = "http://sdettraining.com/trguitransactions/AccountManagement.aspx";
 		driver.get(webURL);
 	}
+
 	@AfterMethod
 	public void tearDown() {
 		System.out.println("Closing test");
