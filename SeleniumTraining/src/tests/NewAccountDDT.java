@@ -18,7 +18,8 @@ public class NewAccountDDT {
 
 	@Test
 	public void NewAccountTest() {
-		System.out.println("NEW RECORD: " + name + " " + email + " " + phone + " " + gender);
+		System.out.println(
+				"NEW RECORD: " + name + " " + email + " " + phone + " " + gender + " " + password + " " + country);
 	}
 
 	@Parameters
