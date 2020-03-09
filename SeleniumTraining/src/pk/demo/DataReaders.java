@@ -5,7 +5,7 @@ import java.util.List;
 public class DataReaders {
 
 	public static void main(String[] args) {
-		readCSV();
+		readXLS();
 	}
 
 	public static void readCSV() {
@@ -18,5 +18,14 @@ public class DataReaders {
 			}
 		}
 	}
-
+	
+	public static void readXLS() {
+		String filename = "D:\\selenium\\nvhuy\\Training\\Week3\\6. Build a Complete Data-Driven Framework\\45. UserLogin.xls";
+		String[][] data = utilities.Excel.get(filename);
+		for (String[] record : data) {
+			System.out.println(record[0]);
+			System.out.println(record[1]);
+			System.out.println(record[2]);
+		}
+	}
 }
