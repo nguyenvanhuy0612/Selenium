@@ -25,7 +25,7 @@ public class DataReaders {
 		for (String[] record : data) {
 			System.out.println(record[0]);
 			System.out.println(record[1]);
-			System.out.println(record[2]);
+			System.out.println(record[2]+"\n");
 		}
 	}
 }
