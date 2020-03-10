@@ -3,11 +3,11 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="smoketests.loginPresentTestNG">
+      <class name="tests.LoginDDT">
         <methods>
-          <include name="loginElementsPresentTest"/>
+          <include name="loginTest"/>
         </methods>
-      </class> <!-- smoketests.loginPresentTestNG -->
+      </class> <!-- tests.LoginDDT -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

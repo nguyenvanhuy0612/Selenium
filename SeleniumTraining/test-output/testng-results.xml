@@ -1,55 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
+<testng-results skipped="0" failed="0" ignored="0" total="4" passed="4">
   <reporter-output>
   </reporter-output>
-  <suite name="SDET TEST" duration-ms="15104" started-at="2020-03-04T13:54:21 ICT" finished-at="2020-03-04T13:54:36 ICT">
+  <suite name="Default suite" duration-ms="450" started-at="2020-03-10T08:43:24 ICT" finished-at="2020-03-10T08:43:24 ICT">
     <groups>
     </groups>
-    <test name="Test1 - Home page" duration-ms="10390" started-at="2020-03-04T13:54:21 ICT" finished-at="2020-03-04T13:54:31 ICT">
-      <class name="smoketests.ATagsTest">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:smoketests.ATagsTest@3108bc]" name="setUp" is-config="true" duration-ms="5716" started-at="2020-03-04T13:54:21 ICT" finished-at="2020-03-04T13:54:27 ICT">
+    <test name="Default test" duration-ms="450" started-at="2020-03-10T08:43:24 ICT" finished-at="2020-03-10T08:43:24 ICT">
+      <class name="tests.LoginDDT">
+        <test-method status="PASS" signature="loginTest(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:tests.LoginDDT@71423665]" name="loginTest" duration-ms="15" started-at="2020-03-10T08:43:24 ICT" data-provider="getData" finished-at="2020-03-10T08:43:24 ICT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Ellie Prynne]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[ep@testemail.com]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[ep1password]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="loginElementsPresentTest()[pri:0, instance:smoketests.ATagsTest@3108bc]" name="loginElementsPresentTest" duration-ms="140" started-at="2020-03-04T13:54:27 ICT" finished-at="2020-03-04T13:54:27 ICT">
+        </test-method> <!-- loginTest -->
+        <test-method status="PASS" signature="loginTest(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:tests.LoginDDT@71423665]" name="loginTest" duration-ms="2" started-at="2020-03-10T08:43:24 ICT" data-provider="getData" finished-at="2020-03-10T08:43:24 ICT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Shawn Thompson]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[sw@testemail.com]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[sw2password]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginElementsPresentTest -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:smoketests.ATagsTest@3108bc]" name="tearDown" is-config="true" duration-ms="69" started-at="2020-03-04T13:54:27 ICT" finished-at="2020-03-04T13:54:27 ICT">
+        </test-method> <!-- loginTest -->
+        <test-method status="PASS" signature="loginTest(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:tests.LoginDDT@71423665]" name="loginTest" duration-ms="2" started-at="2020-03-10T08:43:24 ICT" data-provider="getData" finished-at="2020-03-10T08:43:24 ICT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Michael Lane]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[ml@testemail.com]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[ml3password]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- smoketests.ATagsTest -->
-      <class name="smoketests.loginPresentTestNG">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:smoketests.loginPresentTestNG@370736d9]" name="setUp" is-config="true" duration-ms="4146" started-at="2020-03-04T13:54:27 ICT" finished-at="2020-03-04T13:54:31 ICT">
+        </test-method> <!-- loginTest -->
+        <test-method status="PASS" signature="loginTest(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:tests.LoginDDT@71423665]" name="loginTest" duration-ms="2" started-at="2020-03-10T08:43:24 ICT" data-provider="getData" finished-at="2020-03-10T08:43:24 ICT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Janelle Von]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[jv@testemail.com]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[jv4password]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="loginElementsPresentTest()[pri:0, instance:smoketests.loginPresentTestNG@370736d9]" name="loginElementsPresentTest" duration-ms="193" started-at="2020-03-04T13:54:31 ICT" finished-at="2020-03-04T13:54:31 ICT">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- loginElementsPresentTest -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:smoketests.loginPresentTestNG@370736d9]" name="tearDown" is-config="true" duration-ms="64" started-at="2020-03-04T13:54:31 ICT" finished-at="2020-03-04T13:54:31 ICT">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- smoketests.loginPresentTestNG -->
-    </test> <!-- Test1 - Home page -->
-    <test name="Test2 - login" duration-ms="4673" started-at="2020-03-04T13:54:32 ICT" finished-at="2020-03-04T13:54:36 ICT">
-      <class name="smoketests.loginPresentTestNG">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:smoketests.loginPresentTestNG@3dd4520b]" name="setUp" is-config="true" duration-ms="4280" started-at="2020-03-04T13:54:32 ICT" finished-at="2020-03-04T13:54:36 ICT">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="loginElementsPresentTest()[pri:0, instance:smoketests.loginPresentTestNG@3dd4520b]" name="loginElementsPresentTest" duration-ms="120" started-at="2020-03-04T13:54:36 ICT" finished-at="2020-03-04T13:54:36 ICT">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- loginElementsPresentTest -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:smoketests.loginPresentTestNG@3dd4520b]" name="tearDown" is-config="true" duration-ms="268" started-at="2020-03-04T13:54:36 ICT" finished-at="2020-03-04T13:54:36 ICT">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- smoketests.loginPresentTestNG -->
-    </test> <!-- Test2 - login -->
-  </suite> <!-- SDET TEST -->
+        </test-method> <!-- loginTest -->
+      </class> <!-- tests.LoginDDT -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>
