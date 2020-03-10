@@ -9,6 +9,7 @@ public class LoginDDT {
 		System.out.println("RECORD: " + name + " " + email + " " + password + "\n");
 	}
 
+	
 	@DataProvider
 	public String[][] getData() {
 		String filename = "D:\\selenium\\nvhuy\\Training\\Week3\\6. Build a Complete Data-Driven Framework\\45. UserLogin.xls";
