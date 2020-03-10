@@ -8,7 +8,6 @@ public class LoginDDT {
 	public void loginTest(String name, String email, String password) {
 		System.out.println("RECORD: " + name + " " + email + " " + password + "\n");
 	}
-
 	
 	@DataProvider
 	public String[][] getData() {
