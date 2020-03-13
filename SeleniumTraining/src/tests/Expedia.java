@@ -16,12 +16,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class Expedia {
-	WebDriverWait wait;
 	WebDriver driver;
 	String city = "New York, New York";
 	String checkIn = "03/12/2020";
 	String checkOut = "03/17/2020";
-	int adults = 3;
+	int adults = 1;
 	String star = "star-3";
 	String posResult = "2";
 
@@ -29,9 +28,10 @@ public class Expedia {
 	public void hotelReservation() throws Exception {
 		// 1 Search
 
-		WebElement hotelElement = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@data-lob='hotel']")));
-		hotelElement.click();
+		By hotelBy = By.xpath("//button[@data-lob='hotel']");
+		System.out.println("find hotelBy done " + hotelBy.toString());
+
+		driver.findElement(hotelBy).click();
 		driver.findElement(By.id("hotel-destination-hp-hotel")).sendKeys(city);
 		driver.findElement(By.id("hotel-checkin-hp-hotel")).sendKeys(checkIn);
 		driver.findElement(By.id("hotel-checkout-hp-hotel")).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
@@ -56,16 +56,18 @@ public class Expedia {
 				.click();
 		closeAdsWindows();
 		// 2. Modify the search results page, give criteria
+		By starBy = By.xpath("//label[@for='" + star + "']");
+		System.out.println("find starBy done " + starBy.toString());
 
-		WebElement starElement = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[@for='" + star + "']")));
-		starElement.click();
+		driver.findElement(starBy).click();
 		closeAdsWindows();
-		
+
 		// 3. Analyze the results and make our selection
-		WebElement resultElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath("//section[@class = 'results']/ol/li[" + posResult + "]/div/div/a")));
-		resultElement.click();
+		By resultBy = By.xpath("//*[@class = 'results']/ol/li[" + posResult + "]/div/div/a");
+		System.out.println("find resultBy done " + resultBy.toString());
+
+		driver.findElement(resultBy).click();
+		closeAdsWindows();
 
 		// switch tabs
 		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
@@ -85,18 +87,17 @@ public class Expedia {
 
 	@BeforeMethod
 	public void setUp() {
-		String url = "https://www.expedia.com/";
+		String url = "https://www.expedia.com";
 		driver = utilities.DriverFactory.CreateDriver("chrome");
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
-		wait = new WebDriverWait(driver, 30);
 		driver.get(url);
 	}
 
 	@AfterMethod
 	public void tearDown() {
-		driver.quit();
+		// driver.quit();
 	}
 
 	public void closeAdsWindows() {
@@ -114,5 +115,25 @@ public class Expedia {
 			}
 		}
 		driver.switchTo().window(MainWindow);
+	}
+
+	public void closeChildTabs() {
+		String winHandleBefore = driver.getWindowHandle();
+		// Switch to new window opened
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle);
+		}
+		// Perform the actions on new window
+		driver.findElement(By.id("edit-name")).clear();
+		WebElement userName = driver.findElement(By.id("edit-name"));
+		userName.clear();
+		try {
+			driver.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("not close");
+		}
+		driver.switchTo().window(winHandleBefore);
 	}
 }

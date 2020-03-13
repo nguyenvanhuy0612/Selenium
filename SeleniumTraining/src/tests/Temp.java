@@ -25,39 +25,51 @@ public class Temp {
 	@Test
 	public void hotelReservation() throws Exception {
 		// 1 Search
-		WebDriverWait wait = new WebDriverWait(driver, 20);
+
 		closeAdsWindows();
 		// 2. Modify the search results page, give criteria
 
 		By byStar = By.cssSelector("label[class='uitk-button-toggle-label'][for='" + starInput + "']");
-		wait.until(ExpectedConditions.visibilityOfElementLocated(byStar));
+
 		driver.findElement(byStar).click();
-		Thread.sleep(3000);
 		closeAdsWindows();
+
 		// 3. Analyze the results and make our selection
+		Thread.sleep(6000);
 		By byResult = By.xpath("//*[@class = 'results']/ol/li[" + searchInput + "]/div/div/a");
-		wait.until(ExpectedConditions.visibilityOfElementLocated(byResult));
+
 		driver.findElement(byResult).click();
-		//System.out.println(
-		//		driver.findElement(By.xpath("//*[@id='app']//a[@data-stid = 'open-hotel-information']")).getText());
-		
+		// System.out.println(
+		// driver.findElement(By.xpath("//*[@id='app']//a[@data-stid =
+		// 'open-hotel-information']")).getText());
+
 		// switch tabs
 		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
-		String currentURL = driver.getCurrentUrl();
-		System.out.println(currentURL);
+		// String currWindow = driver.getWindowHandle();
+//		for (String window : windows) {
+//			driver.switchTo().window(window);
+//			String currentUrl = driver.getCurrentUrl();
+//			System.out.println("URL cua cua so " + window + " la: " + currentUrl);
+//		}
 		driver.switchTo().window(windows.get(1));
-		System.out.println(driver.getCurrentUrl());
-		
+		Thread.sleep(5000);
+		if (!driver.getCurrentUrl().contains("https://www.expedia.com")) {
+			driver.close();
+			driver.switchTo().window(windows.get(0));
+			driver.findElement(byResult).click();
+		}
 		// Print data
-		String hotelName = driver.findElement(By.xpath("//*[@id='app']//h1[@data-stid='content-hotel-title']"))
-				.getText();
-		String ratePoint = driver.findElement(By.xpath("//*[@id='app']//span[@class='reviews-summary__rating-value']"))
-				.getText();
+		By hotelBy = By.xpath("//*[@id='app']//h1[@data-stid='content-hotel-title']");
+		String hotelName = driver.findElement(hotelBy).getText();
+		By rateBy = By.xpath("//*[@id='app']//span[@class='reviews-summary__rating-value']");
+		String ratePoint = driver.findElement(rateBy).getText();
 		System.out.println(hotelName);
 		System.out.println(ratePoint);
 
 		// 4. Book reservation
-
+		By reserveBy = By.xpath("//button[@class='uitk-button uitk-button-small uitk-button-primary']");
+		System.out.println("reserveBy: " + reserveBy);
+		driver.findElement(reserveBy).click();
 		// 5. Fill out contact / bill
 
 		// 6. Get Confirmation
@@ -68,7 +80,9 @@ public class Temp {
 	public void setUp() {
 		String url = "https://www.expedia.com/Hotel-Search?adults=1&destination=New%20York%2C%20New%20York&endDate=2020-03-20&latLong=40.75668%2C-73.98647&regionId=178293&rooms=1&semdtl=&sort=RECOMMENDED&startDate=2020-03-10&theme=&useRewards=true&userIntent";
 		driver = utilities.DriverFactory.CreateDriver("chrome");
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+		driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
 		driver.get(url);
