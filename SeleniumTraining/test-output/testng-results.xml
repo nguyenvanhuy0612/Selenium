@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="55188" started-at="2020-03-13T09:37:08 ICT" finished-at="2020-03-13T09:38:03 ICT">
+  <suite name="Default suite" duration-ms="45235" started-at="2020-03-14T00:22:35 ICT" finished-at="2020-03-14T00:23:20 ICT">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="55188" started-at="2020-03-13T09:37:08 ICT" finished-at="2020-03-13T09:38:03 ICT">
+    <test name="Default test" duration-ms="45235" started-at="2020-03-14T00:22:35 ICT" finished-at="2020-03-14T00:23:20 ICT">
       <class name="tests.Temp">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:tests.Temp@13a5fe33]" name="setUp" is-config="true" duration-ms="21029" started-at="2020-03-13T09:37:08 ICT" finished-at="2020-03-13T09:37:29 ICT">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:tests.Temp@13a5fe33]" name="setUp" is-config="true" duration-ms="16676" started-at="2020-03-14T00:22:35 ICT" finished-at="2020-03-14T00:22:52 ICT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="hotelReservation()[pri:0, instance:tests.Temp@13a5fe33]" name="hotelReservation" duration-ms="34022" started-at="2020-03-13T09:37:29 ICT" finished-at="2020-03-13T09:38:03 ICT">
+        <test-method status="PASS" signature="hotelReservation()[pri:0, instance:tests.Temp@13a5fe33]" name="hotelReservation" duration-ms="28483" started-at="2020-03-14T00:22:52 ICT" finished-at="2020-03-14T00:23:20 ICT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- hotelReservation -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.Temp@13a5fe33]" name="tearDown" is-config="true" duration-ms="1" started-at="2020-03-13T09:38:03 ICT" finished-at="2020-03-13T09:38:03 ICT">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:tests.Temp@13a5fe33]" name="tearDown" is-config="true" duration-ms="1" started-at="2020-03-14T00:23:20 ICT" finished-at="2020-03-14T00:23:20 ICT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->

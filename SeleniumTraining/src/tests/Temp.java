@@ -26,13 +26,13 @@ public class Temp {
 	public void hotelReservation() throws Exception {
 		// 1 Search
 
-		closeAdsWindows();
+		// closeAdsWindows();
 		// 2. Modify the search results page, give criteria
 
 		By byStar = By.cssSelector("label[class='uitk-button-toggle-label'][for='" + starInput + "']");
 
 		driver.findElement(byStar).click();
-		closeAdsWindows();
+		// closeAdsWindows();
 
 		// 3. Analyze the results and make our selection
 		Thread.sleep(6000);
@@ -56,20 +56,31 @@ public class Temp {
 		if (!driver.getCurrentUrl().contains("https://www.expedia.com")) {
 			driver.close();
 			driver.switchTo().window(windows.get(0));
-			driver.findElement(byResult).click();
+//			try {
+//				driver.findElement(byResult).click();
+//			} catch (Exception e) {
+//				System.out.println(e);
+//			}
+
 		}
 		// Print data
 		By hotelBy = By.xpath("//*[@id='app']//h1[@data-stid='content-hotel-title']");
 		String hotelName = driver.findElement(hotelBy).getText();
 		By rateBy = By.xpath("//*[@id='app']//span[@class='reviews-summary__rating-value']");
 		String ratePoint = driver.findElement(rateBy).getText();
-		System.out.println(hotelName);
-		System.out.println(ratePoint);
+		System.out.println("hotelName: " + hotelName);
+		System.out.println("ratePoint: " + ratePoint);
 
 		// 4. Book reservation
 		By reserveBy = By.xpath("//button[@class='uitk-button uitk-button-small uitk-button-primary']");
 		System.out.println("reserveBy: " + reserveBy);
 		driver.findElement(reserveBy).click();
+
+		By firstPickBy = By.xpath("(//button[@type='submit'])[3]");
+		System.out.println("firstPickBy: " + firstPickBy.toString());
+		driver.findElement(firstPickBy).click();
+		closeAdsWindows();
+
 		// 5. Fill out contact / bill
 
 		// 6. Get Confirmation

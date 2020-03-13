@@ -18,14 +18,14 @@ public class DriverFactory {
 
 		if (browserType.equalsIgnoreCase("ie")) {
 			System.setProperty("webdriver.ie.driver",
-					"D:\\selenium\\nvhuy\\IEDriverServer_x64_3.150.1\\IEDriverServer.exe");
+					"D:\\selenium\\nvhuy\\drivers\\IEDriverServer.exe");
 			return new InternetExplorerDriver();
 		} else if (browserType.equalsIgnoreCase("firefox")) {
 			System.setProperty("webdriver.gecko.driver",
-					"D:\\\\selenium\\\\nvhuy\\\\geckodriver-v0.26.0-win32\\\\geckodriver.exe");
+					"D:\\selenium\\nvhuy\\drivers\\geckodriver.exe");
 			return new FirefoxDriver();
 		} else {
-			System.setProperty("webdriver.chrome.driver", "D:\\selenium\\nvhuy\\chromedriver_win32\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "D:\\selenium\\nvhuy\\drivers\\chromedriver_v80_new.exe");
 			return new ChromeDriver(options);
 		}
 
