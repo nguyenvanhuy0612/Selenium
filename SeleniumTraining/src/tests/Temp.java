@@ -37,7 +37,7 @@ public class Temp {
 		// 3. Analyze the results and make our selection
 		Thread.sleep(6000);
 		By byResult = By.xpath("//*[@class = 'results']/ol/li[" + searchInput + "]/div/div/a");
-
+		Thread.sleep(5000);
 		driver.findElement(byResult).click();
 		// System.out.println(
 		// driver.findElement(By.xpath("//*[@id='app']//a[@data-stid =
@@ -52,6 +52,8 @@ public class Temp {
 //			System.out.println("URL cua cua so " + window + " la: " + currentUrl);
 //		}
 		driver.switchTo().window(windows.get(1));
+		String currentUrl = driver.getCurrentUrl();
+		System.out.println("URL cua cua so la: " + currentUrl);
 		Thread.sleep(5000);
 		if (!driver.getCurrentUrl().contains("https://www.expedia.com")) {
 			driver.close();
