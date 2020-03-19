@@ -25,10 +25,11 @@ public class WorkspaceEWC {
 		driver.findElement(By.id("username")).sendKeys(username);
 		driver.findElement(By.id("password")).sendKeys(password);
 		driver.findElement(By.id("login-button")).click();
+		
+		// Wait for load
 		Thread.sleep(5000);
 
 		// Active
-
 		driver.findElement(By.xpath("//*[@type='submit']")).click();
 
 		// Thread.sleep(2000);
@@ -49,10 +50,13 @@ public class WorkspaceEWC {
 		String agentStatus = driver.findElement(By.xpath("//div[@id='ow_Icon_State2']")).getText();
 		System.out.println("agentStatus: " + agentStatus);
 		Hover(driver, driver.findElement(By.xpath("//*[@id='ow_go_not_ready']")));
-		List<WebElement> agentState = driver
-				.findElements(By.xpath("//*[@id='menu_container_22']/md-menu-content/md-menu-item"));
+		List<WebElement> agentStates = driver
+				.findElements(By.xpath("//*[starts-with(@id,'menu_container')][2]/md-menu-content/md-menu-item")); //*[starts-with(@id,"menu_container")][2]/md-menu-content/md-menu-item
+		for (WebElement agentState : agentStates ) {
+			System.out.println("agentState: "+agentState.getText());
+		}
 		if (!agentStatus.contains("NOT")) {
-			agentState.get(2).click();
+			agentStates.get(3).click();
 		}
 
 	}

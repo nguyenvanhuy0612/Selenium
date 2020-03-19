@@ -2,24 +2,24 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="24919" started-at="2020-03-16T15:25:29 ICT" finished-at="2020-03-16T15:25:54 ICT">
+  <suite name="Default suite" duration-ms="18487" started-at="2020-03-17T08:59:20 ICT" finished-at="2020-03-17T08:59:39 ICT">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="24919" started-at="2020-03-16T15:25:29 ICT" finished-at="2020-03-16T15:25:54 ICT">
-      <class name="tests.WorkspaceEWC">
-        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.WorkspaceEWC@210366b4]" name="Setup" is-config="true" duration-ms="5201" started-at="2020-03-16T15:25:29 ICT" finished-at="2020-03-16T15:25:34 ICT">
+    <test name="Default test" duration-ms="18487" started-at="2020-03-17T08:59:20 ICT" finished-at="2020-03-17T08:59:39 ICT">
+      <class name="tests.WorkspaceEWC2">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.WorkspaceEWC2@210366b4]" name="Setup" is-config="true" duration-ms="12954" started-at="2020-03-17T08:59:20 ICT" finished-at="2020-03-17T08:59:33 ICT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="EWC()[pri:0, instance:tests.WorkspaceEWC@210366b4]" name="EWC" duration-ms="19636" started-at="2020-03-16T15:25:34 ICT" finished-at="2020-03-16T15:25:54 ICT">
+        <test-method status="PASS" signature="EWC()[pri:0, instance:tests.WorkspaceEWC2@210366b4]" name="EWC" duration-ms="5458" started-at="2020-03-17T08:59:33 ICT" finished-at="2020-03-17T08:59:39 ICT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- EWC -->
-        <test-method status="PASS" signature="TearDown()[pri:0, instance:tests.WorkspaceEWC@210366b4]" name="TearDown" is-config="true" duration-ms="0" started-at="2020-03-16T15:25:54 ICT" finished-at="2020-03-16T15:25:54 ICT">
+        <test-method status="PASS" signature="TearDown()[pri:0, instance:tests.WorkspaceEWC2@210366b4]" name="TearDown" is-config="true" duration-ms="0" started-at="2020-03-17T08:59:39 ICT" finished-at="2020-03-17T08:59:39 ICT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TearDown -->
-      </class> <!-- tests.WorkspaceEWC -->
+      </class> <!-- tests.WorkspaceEWC2 -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

@@ -25,8 +25,8 @@ public class WorkspaceEWC2 {
 		WebElement ele1 = driver.findElement(By.xpath("//body//nav//li[9]"));
 		List<WebElement> ele2 = driver.findElements(By.xpath("//li[9]//div[1]//a"));
 		Hover(driver,ele1);
-		Hover(driver,ele2.get(0));
-		ele2.get(0).click();
+		Hover(driver,ele2.get(3));
+		//ele2.get(0).click();
 	}
 
 	@BeforeMethod

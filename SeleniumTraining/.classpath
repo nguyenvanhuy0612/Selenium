@@ -8,5 +8,8 @@
 	<classpathentry kind="lib" path="D:/selenium/nvhuy/drivers/poi-3.17.jar"/>
 	<classpathentry kind="lib" path="D:/selenium/nvhuy/drivers/selenium-server-standalone-3.141.59.jar"/>
 	<classpathentry kind="lib" path="D:/selenium/nvhuy/drivers/apache-log4j-2.13.1-bin/log4j-1.2-api-2.13.1.jar"/>
+	<classpathentry kind="lib" path="D:/selenium/nvhuy/drivers/cucumber-core-1.2.5.jar"/>
+	<classpathentry kind="lib" path="D:/selenium/nvhuy/drivers/cucumber-java-1.2.5.jar"/>
+	<classpathentry kind="lib" path="D:/selenium/nvhuy/drivers/cucumber-junit-1.2.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
