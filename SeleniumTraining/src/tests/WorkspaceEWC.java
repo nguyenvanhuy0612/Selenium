@@ -74,7 +74,8 @@ public class WorkspaceEWC {
 		System.out.println("windows: " + windows);
 		driver.switchTo().window(windows.get(1));
 		driver.get(webchatURL);
-
+		
+		
 		String tab1 = driver.getWindowHandle();
 		System.out.println("Tab1: " + tab1);
 
