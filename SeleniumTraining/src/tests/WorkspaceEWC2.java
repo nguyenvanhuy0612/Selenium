@@ -21,19 +21,27 @@ public class WorkspaceEWC2 {
 	String password = "1_Abc_123";
 
 	@Test
-	public void TEST() {
+	public void TEST() throws InterruptedException {
 		String mainTab = driver.getWindowHandle();
 		System.out.println("mainTab: " + mainTab);
-		//driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "t");
+		// driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "t");
 
 		// new tabs
 		((JavascriptExecutor) driver).executeScript("window.open()");
 		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
+		System.out.println("windows" + windows);
 		driver.switchTo().window(windows.get(1));
 		System.out.println("Tab1: " + driver.getWindowHandle());
 		driver.get(wsURL);
+		Thread.sleep(5000);
 		
-		
+		((JavascriptExecutor) driver).executeScript("window.open()");
+		windows = new ArrayList<String>(driver.getWindowHandles());
+		System.out.println("windows" + windows);
+		driver.switchTo().window(windows.get(2));
+		System.out.println("Tab1: " + driver.getWindowHandle());
+		driver.get(wsURL);
+
 //		((JavascriptExecutor) driver).executeScript("window.open()");
 //		Set<String> tabs = driver.getWindowHandles();
 //		System.out.println("List tabs: " + tabs);
@@ -44,7 +52,7 @@ public class WorkspaceEWC2 {
 	public void Setup() {
 		driver = utilities.DriverFactory.CreateDriver("chrome");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		//driver.manage().window().maximize();
+		// driver.manage().window().maximize();
 		driver.get(wsURL);
 	}
 
