@@ -1,0 +1,118 @@
+https://vananhtooo.wordpress.com/2018/09/06/javascript-executor-trong-selenium-webdriver/
+
+JavaScript Executor trong Selenium Webdriver
+SEPTEMBER 6, 2018 VANANHTOLEAVE A COMMENT
+Hôm nay sẽ cùng các bạn tóm lược về thành phần khá là mạnh mẽ trong Selenium Webdriver như tiêu đề bài viết. Hi vọng rằng bài viết sẽ giúp các bạn biết hơn về Javascript Executor còn có hiểu hơn không thì chưa biết. :v
+
+1. Tổng quan về Javascript Executor
+Javascript Executor là một interface của Selenium Webdriver, nó có chức năng tương tự như của Java Script và có thể tương tác với các phần tử HTML DOM. Thay vì sử dụng method driver.findElement của Selenium Webdriver thì chúng ta có thể sử dụng JavaScriptExecutor Interface để thực hiện những thao tác tương tự trên trang ứng dụng.
+
+
+Javascript Executor cho phép chúng ta có thể chạy mã Javascript thuần túy bất kể là chúng ta đang sử dụng ngôn ngữ nào với Selenium như Java, C# hay Python…
+
+Thường thì chúng ta sẽ chỉ sử dụng Javascript Executor trong những trường hợp mà khi sử dụng các method thông thường khác với Selenium nó không thể thực thi được như mong muốn.
+
+Để sử dụng được Javascript Executor, không nhất thiết bạn phải có kiến thức và hiểu biết quá sâu về Javascript mới làm được, một thực tế là bạn chỉ cần tìm kiếm Google là ra cả tá :v từ Stackoverflow cho đến Guru99 hay ToolSQA … sau đó copy về dùng thôi. Nhưng sẽ tốt hơn nếu bạn hiểu về nó, để có thể linh hoạt sử dụng trong nhiều những trường hợp có thể gặp sau này! 😀
+
+Như đã nói phía trên, Javascript là một interface thuộc package org.openqa.selenium trongSelenium Webdriver. Có hai abstract method là:
+
+executeScript()
+executeAsyncScript()
+Để sử dụng các method trong Javascript Executor interface ta phải ép đối tượng driver thành kiểu Javascript Executor, theo cú pháp dưới đây:
+
+// chuyển kiểu của đối tượng driver thành JavascriptExecutor
+JavascriptExecutor js = (JavascriptExecutor) driver;
+
+// sử dụng các methods
+js.executeScript("javascript command");
+js.executeAsyncScript("javascript command");
+Hầu như là chúng ta sẽ sử dụng method executeScript() còn về executeAsyncScript() mình cũng chưa dùng và chưa tìm hiểu nên sẽ không nhắc đến ở đây – nên cũng đừng thắc mắc mình nha. :v
+
+Bên cạnh cú pháp trên, cũng có một cách khác ngắn hơn để sử dụng Javascript Executor, nhưng theo khuyến cáo đây không phải là cách hoàn hảo nhất, tuy nhiên khi tìm kiếm từ Google lại ra rất nhiều kết quả hướng dẫn giống như này và mình cũng chưa hiểu tại sao mà nó lại không phải là một cách hoàn hảo nhất như lời khuyến cáo 😐 :
+
+((JavascriptExecutor) driver).executeScript("javascript command");
+2. Sử dụng Javascript Executor
+2.1. Tìm 1 phần tử với Javascript Executor (Find an element)
+Ở ví dụ phía dưới, mình sử dụng ID để tìm một phần tử trên một trang, chúng ta cũng có thể thay bằng các thuộc tính khác tương ứng của phần tử cần tìm như Name, hay CSS.
+
+Cú pháp:
+
+JavascriptExecutor js = (JavascriptExecutor) driver;
+Object searchTextbar = js.executeScript
+                       ("return document.getElementById('lst-ib')");
+((WebElement) searchTextbar).sendKeys("abc");
+2.2. Click vào một phần tử nào đó (Click an element)
+Tương tự như khi tìm kiếm một phần tử, với Javascript Executor ta cũng có thể thực hiện thao tác click vào một phần tử dựa trên thông tin của phần tử đó. Ở ví dụ phía dưới đây mình thực hiện lấy phần tử dựa theo tên của nó, ta có cú pháp như sau:
+
+JavascriptExecutor js = (JavascriptExecutor) driver;
+js.executeScript("document.getElementsByName('btnI')[0].click()");
+2.3. Thực hiện sendKey
+Ta có thể sử dụng Javascript Executor để thực hiện truyền giá trị cho các phần tử cho phép nhập dữ liệu là textbox hay text area trong Selenium Webdriver. Các bạn có thể tham khảo cú pháp dưới đây:
+
+JavascriptExecutor js = (JavascriptExecutor) driver;
+js.executeScript("document.getElementById('lst-ib').value='chercher tech'");
+2.4. Thực hiện scroll webpage (cuộn trang)
+Trường hợp này có lẽ là quen thuộc hơn cả, đó là khi mà trang ứng dụng quá dài, và không thể hiển thị hết chiều dài nội dung trong khung màn hình được, do vậy mà ta sẽ cần phải thực hiện cuộn trang để có thể di chuyển đến vị trí tọa độ cụ thể mong muốn trên trang ứng dụng. Đây là công việc mà ta sẽ không thể dùng Selenium webdriver để thực hiện được. Lúc này, Javascript Executor sẽ giúp bạn làm việc này một cách dễ dàng, với cú pháp:
+
+JavascriptExecutor js = (JavascriptExecutor)driver;
+js.executeScript("window.scrollBy(0,300)");
+Giải thích một chút chỗ js.executeScript(“window.scrollBy(0,300)”);
+
+scrollBy(horizontalDistance,verticalDistance): ta có hai tham số đầu vào là:
+
+horizontalDistance – Là khoảng cách được cuộn theo chiều ngang
+verticalDistance – Khoảng cách được cuộn theo chiều dọc
+Như ví dụ phía trên mình có scrollBy(0, 300) có nghĩa là cuộn xuống phía dưới 300px theo chiều dài của trang web. Tương tự bạn có thể thay bằng các giá trị khác tùy theo yêu cầu và mong muốn.
+
+2.5. Scroll into view
+Vốn từ mình hơi ít nên không biết dùng từ diễn đạt sang Tiếng Việt như nào cho dễ hiểu, ở đây có thể hiểu nôm na rằng là cuộn trang đến một vùng cụ thể hoặc một phần tử cụ thể nào đó trên trang. Ví dụ: ta có thể gặp trường hợp như muốn tương tác đến một trường A nào đó trên trang ứng dụng, nhưng vì có nhiều thông tin nên trường này không thể hiển thị được trên một màn hình mà phải cuộn  trang web xuống phía dưới trường này để nhập thông tin, lúc này sử dụng “scroll into view” để cuộn xuống phía dưới, ta sẽ nhìn thấy trường này ở trên màn hình hiển thị, và cho đến thời điểm này bạn mới thực hiện tương tác được với trường A thông qua Selenium.
+
+Không biết với ví dụ trên các bạn đã hình dung được chưa, nhưng tóm váy lại là Javascript Executor có thể giúp bạn làm cái công việc mô tả loằng ngoằng phía trên kia.
+
+Ta sử dụng hàm scrollIntoView() – tên gọi đúng như mục đích sử dụng, và có cú pháp như sau:
+
+JavascriptExecutor js = (JavascriptExecutor) driver;
+js.executeScript("document.getElementById('default').scrollIntoView(true)");
+2.6. Một số việc khác mà Javascript Executor có thể làm được
+Bên cạnh những công việc bên trên Javascript Executor có thể xử lý ngon lành thì cũng còn có rất nhiều những tác vụ khác mà ta có thể “lợi dụng” Javascript Executor làm nếu thấy “thích” như:
+
+1. Lấy ra thông tin title của ứng dụng web với cú pháp:
+js.executeScript("return document.title");
+2. Lấy ra thông tin địa chỉ URL của ứng dụng:
+js.executeScript("return document.URL");
+3. Kiểm tra trạng thái của trang web đã được tải về hay chưa:
+js.executeScript("return document.readyState");
+4. Điều chỉnh mức độ phóng to thu nhỏ hiển thị của nội dung trang web:
+js.executeScript("document.body.style.zoom='90");
+5. Lấy ra thông tin về kích thước của ứng dụng web:
+// Độ cao
+js.executeScript("window.innerHeight");
+// Độ rộng
+js.executeScript("window.innerWidth");
+6. Lấy ra thông tin về kích thước của trình duyệt:
+js.executeScript("window.outerHeight");
+js.executeScript("window.outerWidth");
+7. Điều hướng đến một địa chỉ URL nào đó:
+js.executeScript("window.location="https://google.com";");
+Và còn kha khá những thứ hay ho khác nữa. Tuy nhiên chắc chẳng mấy khi dùng đến đâu ấy, liệt kê ra cho mọi người biết được là Javascript Executor đích thị là một “soái ca” hay ho và đa năng :v. Có cái gì mà anh không làm được đâu? Chỉ là các em không biết tận dụng anh thôi =))
+
+Nhưng mà có phải Javascript Executor thực sự không có nhược điểm gì? Đọc tiếp để xem “soái ca” này cuối cùng có phải là “Mr. Right” với Selenium Webdriver không nhé!
+
+3. Javascript Executor có phải là “soái ca” đích thực?
+Đầu tiên phải nhắc lại một lần rằng, Selenium Webdriver hoạt động tương tự như một người dùng cụ thể của ứng dụng. Selenium Webdriver thực thi những thao tác mà một người dùng thực sự có thể làm đối với một phần tử nào đó trên ứng dụng web.
+
+Nếu như trên thực tế, Selenium Webdriver không thể tương tác với một phần tử nào đó trên trang ứng dụng thì ta cũng cần phải cân nhắc xem liệu rằng đó có phải là một lỗi hay không trước khi sử dụng Javascript Executor để ép buộc nó phải chạy theo ý mình. Biết đâu lỗi thật thì có phải là nguy hiểm không? :v
+
+Bạn nên kiểm tra kỹ trên tất cả các trình duyệt với code Selenium Webdriver thông thường (các trình duyệt mà ứng dụng được yêu cầu cần phải được test), có thể phần tử đó chỉ có thể hoạt động đúng trên một trình duyệt nào đó – thì có thể cân nhắc sử dụng Javascript Executor, còn nếu như trên tất cả trình duyệt bạn kiểm tra, phần tử đó không hoạt động đúng thì cần đánh False testcase thay vì sử dụng Javascript Executor.
+
+Điều này sẽ đảm bảo rằng bạn không bị lọt bug, trong trường hợp sử dụng Javascript Executor thì có thể chạy ngon lành nhưng trên thực tế thì phần tử đó lại không hiển thị, (do một vài lỗi trong quá trình phát triển) và đối với người dùng thực tế bằng xương bằng thịt lại chẳng thể thao tác được.
+
+[[ Tất nhiên sẽ không tính những trường hợp đặc biệt khác – mà bắt buộc phải sử dụng Javascript Executor mới làm được. ]]
+
+Thế nên đã trả lời cho các bạn rằng, đây cũng có thể là một “sói ca” và các bạn cần hết sức cẩn trọng nhé! 😀
+
+Hi vọng rằng bài viết sẽ giúp các bạn có thêm thông tin hữu ích về Javasript Executor trong Selenium Webdriver.
+
+Các bạn cũng có thể tham khảo thêm tại link:
+
+https://chercher.tech/java/javascript-executor-selenium-webdriver#sendkeys

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +17,8 @@ public class WorkspaceEWC {
 	// Variable
 	WebDriver driver;
 	String wsURL = "http://100.30.6.137:31380/Login/?returnpage=../services/UnifiedAgentController/workspaces/";
+	String webchatURL = "http://10.30.1.236:8080/ewcsite/";
+	String checkLink = "https://autosrv98:8445/CustomerControllerWeb/callback";
 	String username = "ACC_Huy@automation";
 	String password = "1_Abc_123";
 
@@ -34,7 +36,7 @@ public class WorkspaceEWC {
 		// Active
 		driver.findElement(By.xpath("//*[@type='submit']")).click();
 
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		try {
 			driver.findElement(By.xpath("//*[@type='button'][@aria-label='Start Work']")).click();
 		} catch (NoSuchElementException e) {
@@ -51,35 +53,59 @@ public class WorkspaceEWC {
 		 */
 
 		// Change state
-		driver.findElement(By.xpath("//*[@id='ow_agent_dropdown_menu']/md-menu-button/button")).click();
-		Thread.sleep(2000);
-
-		try {
-			driver.findElement(By.xpath("//*[@id='ow_go_ready']")).click();
-		} catch (NoSuchElementException e) {
-			System.out.println("ow_go_ready: " + e.toString());
-		}
 
 		String agentStatus = driver.findElement(By.xpath("//div[@id='ow_Icon_State2']")).getText();
 		System.out.println("agentStatus: " + agentStatus);
 
+		if (!agentStatus.startsWith("READY")) {
+			driver.findElement(By.xpath("//*[@id='ow_agent_dropdown_menu']/md-menu-button/button")).click();
+			Thread.sleep(1000);
+			driver.findElement(By.xpath("//*[@id='ow_go_ready']")).click();
+		}
+
 		// current tab
-		String curTab0 = driver.getWindowHandle();
-		System.out.println("curTab0: " + curTab0);
+		String mainTab0 = driver.getWindowHandle();
+		System.out.println("mainTab0: " + mainTab0);
 
 		// Open new tab
-		driver.findElement(By.xpath("/html/body")).click();
-		driver.findElement(By.xpath("/html/body")).sendKeys(Keys.chord(Keys.CONTROL, "t"));
-		Thread.sleep(2000);
-		String curTab1 = driver.getWindowHandle();
-		System.out.println("curTab1: " + curTab1);
+		Thread.sleep(1000);
+		((JavascriptExecutor) driver).executeScript("window.open()");
+		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
+		System.out.println("windows: " + windows);
+		driver.switchTo().window(windows.get(1));
+		driver.get(webchatURL);
 
+		String tab1 = driver.getWindowHandle();
+		System.out.println("Tab1: " + tab1);
+
+		Thread.sleep(2000);
+		((JavascriptExecutor) driver).executeScript("window.open()");
+		windows = new ArrayList<String>(driver.getWindowHandles());
+		System.out.println("windows: " + windows);
+		driver.switchTo().window(windows.get(2));
+		String tab2 = driver.getWindowHandle();
+		System.out.println("Tab2: " + tab2);
+		driver.get(checkLink);
+		Thread.sleep(3000);
+		try {
+			driver.findElement(By.xpath("//*[@id='details-button']")).click();
+			Thread.sleep(1000);
+			driver.findElement(By.xpath("//*[@id='proceed-link']")).click();
+			Thread.sleep(1000);
+			driver.close();
+			driver.switchTo().window(tab1);
+		} catch (NoSuchElementException e) {
+			driver.close();
+		}
+
+		//
 	}
 
 	@BeforeMethod
 	public void Setup() {
 		driver = utilities.DriverFactory.CreateDriver("chrome");
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get(wsURL);
 	}
@@ -95,6 +121,13 @@ public class WorkspaceEWC {
 
 	}
 
+	public void openAndSwitchNewTabs(String URL, int tabID) {
+		((JavascriptExecutor) driver).executeScript("window.open()");
+		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
+		System.out.println("windows: " + windows);
+		driver.switchTo().window(windows.get(tabID));
+		driver.get(URL);
+	}
 }
 
 //String agentStatus = driver.findElement(By.xpath("//div[@id='ow_Icon_State2']")).getText();
