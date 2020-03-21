@@ -19,17 +19,19 @@ import org.testng.annotations.Test;
 public class WorkspaceEWC {
 	// Variable
 	WebDriver driver;
+	ArrayList<String> windows;
 	String wsURL = "http://100.30.5.92:31380/Login/?returnpage=../services/UnifiedAgentController/workspaces/";// "http://100.30.6.137:31380/Login/?returnpage=../services/UnifiedAgentController/workspaces/";
 	String webchatURL = "http://10.30.1.210:81/ewcsite%20-%20mcha576%20link/";// "http://10.30.1.236:8080/ewcsite/";
 	String checkLink = "https://mcha576.aoc.com:8445/CustomerControllerWeb/currentqueue";// "https://autosrv98:8445/CustomerControllerWeb/callback";
 	String username = "aoc\\nvhuy0002"; // "ACC_Huy@automation";
 	String password = "1_Abc_123";
 	String skillset = "WC_Webchat2";//"WC_HUY_1";
+	String customerEmail = "huy@gmail.com";
 
 	@Test
 	public void EWC() throws InterruptedException {
 		// Login
-
+		
 		driver.findElement(By.id("username")).sendKeys(username);
 		driver.findElement(By.id("password")).sendKeys(password);
 		driver.findElement(By.id("login-button")).click();
@@ -68,7 +70,7 @@ public class WorkspaceEWC {
 		}
 
 		// current WS tab
-		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
+		windows = new ArrayList<String>(driver.getWindowHandles());
 		String mainTab0 = windows.get(0);
 		System.out.println("mainTab0: " + mainTab0);
 
@@ -134,18 +136,21 @@ public class WorkspaceEWC {
 	public static void Hover(WebDriver driver, WebElement element) {
 		Actions action = new Actions(driver);
 		action.moveToElement(element).perform();
-
 	}
 
 	public ArrayList<String> openAndSwitchNewTabs(String URL, int posTab) {
 		((JavascriptExecutor) driver).executeScript("window.open()");
-		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
+		windows = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println("windows" + windows);
 		driver.switchTo().window(windows.get(posTab));
 		System.out.println("CurrTabID: " + driver.getWindowHandle());
 		driver.get(URL);
 		return windows;
 	}
+	public void EWCpage(String URL, String linkCheck, String skillset) {
+		windows = openAndSwitchNewTabs(webchatURL, 1);
+	}
+	
 }
 
 //String agentStatus = driver.findElement(By.xpath("//div[@id='ow_Icon_State2']")).getText();
