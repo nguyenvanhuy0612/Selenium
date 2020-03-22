@@ -94,11 +94,12 @@ public class WorkspaceEWC {
 				} else {
 					selectCard.findElement(By.xpath("//span/button[@aria-label='End']")).click();
 				}
-				Thread.sleep(1000);
+				// Hoi thoai =========================================================================================================== //
+				Thread.sleep(2000);
 				cusChat("Hello");
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 				agentChat("Hello Cust");
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 				
 				//Close
 				selectCard.findElement(By.xpath("//*[contains(@id,'ow_Card_End_btn')]")).click();
