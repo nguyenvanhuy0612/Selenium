@@ -10,3 +10,13 @@ https://www.howkteam.vn/course/excute-javascript-voi-selenium/excute-javascript-
 
 Tai lieu
 Stackoverflow ,Guru99 hay ToolSQA
+
+Cac windows: List String
+
+		Set<String> windows = driver.getWindowHandles();
+		System.out.println("windows" + windows.toString());
+
+		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
+		List<String> winList = new ArrayList<String>(driver.getWindowHandles());
+		System.out.println(windows);
+		System.out.println(winList);

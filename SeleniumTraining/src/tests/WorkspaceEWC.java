@@ -1,6 +1,8 @@
 package tests;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +31,7 @@ public class WorkspaceEWC {
 	String password = "1_Abc_123";
 	String skillset = "WC_Webchat2";// "WC_HUY_1";
 	String customerEmail = "huy@gmail.com";
-	
+
 	@BeforeMethod
 	public void Setup() {
 		driver = utilities.DriverFactory.CreateDriver("chrome");
@@ -38,12 +40,13 @@ public class WorkspaceEWC {
 		driver.manage().window().maximize();
 		driver.get(wsURL);
 	}
-	
+
 	@AfterMethod
 	public void TearDown() {
 		// driver.close();
 	}
-	//@Test
+
+	// @Test
 	public void EWC() throws InterruptedException {
 		// Thong so test
 		WebDriverWait waits = new WebDriverWait(driver, 60);
@@ -129,13 +132,15 @@ public class WorkspaceEWC {
 		driver.findElement(By.xpath("//*[@id='ow_card_accept_btn']")).click();
 
 	}
+
 	@Test
-	public void chat(String message) throws InterruptedException{
+	public void testChat() throws InterruptedException {
+		chat("111");
+	}
+
+	public void chat(String message) throws InterruptedException {
 		openTab(webchatURL);
 	}
-	
-
-
 
 	public static void Hover(WebDriver driver, WebElement element) {
 		Actions action = new Actions(driver);
