@@ -30,8 +30,11 @@ public class WorkspaceEWC {
 
 	@Test
 	public void EWC() throws InterruptedException {
-		// Login
+		// Thong so test
+		WebDriverWait waits = new WebDriverWait(driver, 60);
+		windows = new ArrayList<String>(driver.getWindowHandles());
 		
+		// Login
 		driver.findElement(By.id("username")).sendKeys(username);
 		driver.findElement(By.id("password")).sendKeys(password);
 		driver.findElement(By.id("login-button")).click();
@@ -40,9 +43,10 @@ public class WorkspaceEWC {
 		Thread.sleep(5000);
 
 		// Active
-		driver.findElement(By.xpath("//*[@type='submit']")).click();
+		waits.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@type='submit']"))).click();
 
 		Thread.sleep(2000);
+		// Start work
 		try {
 			driver.findElement(By.xpath("//*[@type='button'][@aria-label='Start Work']")).click();
 		} catch (NoSuchElementException e) {
@@ -58,11 +62,10 @@ public class WorkspaceEWC {
 		 * System.out.println("Message: No need start work"); }
 		 */
 
-		// Change state
+		// Check agent status
 		Thread.sleep(2000);
 		String agentStatus = driver.findElement(By.xpath("//div[@id='ow_Icon_State2']")).getText();
 		System.out.println("agentStatus: " + agentStatus);
-
 		if (!agentStatus.startsWith("READY")) {
 			driver.findElement(By.xpath("//*[@id='ow_agent_dropdown_menu']/md-menu-button/button")).click();
 			Thread.sleep(1000);
@@ -70,7 +73,7 @@ public class WorkspaceEWC {
 		}
 
 		// current WS tab
-		windows = new ArrayList<String>(driver.getWindowHandles());
+		
 		String mainTab0 = windows.get(0);
 		System.out.println("mainTab0: " + mainTab0);
 
@@ -112,7 +115,6 @@ public class WorkspaceEWC {
 		Thread.sleep(1000);
 		driver.switchTo().window(windows.get(0));
 
-		WebDriverWait waits = new WebDriverWait(driver, 60);
 		waits.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='ow_card_accept_btn']")));
 
 		driver.findElement(By.xpath("//*[@id='ow_card_accept_btn']")).click();
