@@ -1,11 +1,13 @@
 package tests;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,7 +24,6 @@ public class WorkspaceEWC {
 	WebDriver driver;
 	Set<String> windows;
 	Iterator<String> itr;
-	WebDriverWait waits = new WebDriverWait(driver, 60);
 	String wsID;
 	String ewcID;
 	String wsURL = "http://100.30.5.92:31380/Login/?returnpage=../services/UnifiedAgentController/workspaces/";// "http://100.30.6.137:31380/Login/?returnpage=../services/UnifiedAgentController/workspaces/";
@@ -33,6 +34,86 @@ public class WorkspaceEWC {
 	String skillset = "WC_Webchat3";// "WC_HUY_1";
 	String cusEmail = "huy@gmail.com";
 	String cusName = "huy";
+	boolean acceptEWC = true;
+
+	@Test
+	public void EWC() throws InterruptedException {
+		WebDriverWait waits = new WebDriverWait(driver, 60);
+		
+		// Login
+				driver.findElement(By.id("username")).sendKeys(username);
+				driver.findElement(By.id("password")).sendKeys(password);
+				driver.findElement(By.id("login-button")).click();
+				// Wait for load
+				Thread.sleep(5000);
+				// Active
+				waits.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@type='submit']"))).click();
+				Thread.sleep(2000);
+				// Start work
+				try {
+					driver.findElement(By.xpath("//*[@type='button'][@aria-label='Start Work']")).click();
+				} catch (NoSuchElementException e) {
+				}
+				// Check agent status
+				Thread.sleep(1000);
+				String agentStatus = driver.findElement(By.xpath("//div[@id='ow_Icon_State2']")).getText();
+				System.out.println("agentStatus: " + agentStatus);
+				// Go ready
+				if (!agentStatus.startsWith("READY")) {
+					Thread.sleep(1000);
+					driver.findElement(By.xpath("//*[@id='ow_agent_dropdown_menu']/md-menu-button/button")).click();
+					Thread.sleep(1000);
+					driver.findElement(By.xpath("//*[@id='ow_go_ready']")).click();
+				}
+				// current WS tab
+				wsID = driver.getWindowHandle();
+				// Open EWC tab
+				Thread.sleep(7000);
+				ewcID = chatSetUp();
+				Thread.sleep(1000);
+				driver.switchTo().window(wsID);
+				Thread.sleep(1000);
+				// Chon card group
+				WebElement selectCard = null;
+				waits.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//card-group")));
+				List<WebElement> cardgroup = driver.findElements(By.xpath("//card-group"));
+				for (int i = 0; i <= cardgroup.size(); i++) {
+					WebElement curCard = cardgroup.get(i);
+					if (selectCard == null) {
+						selectCard = cardgroup.get(0);
+					}
+					if (curCard.findElement(By.xpath("//bdi[@aria-label='" + cusEmail + "']")).getText().contains(cusEmail)) {
+						selectCard = curCard;
+						break;
+					}
+				}
+				// Accept or reject
+				Thread.sleep(500);
+				if (acceptEWC) {
+					selectCard.findElement(By.xpath("//*[@id='ow_card_accept_btn']")).click();
+				} else {
+					selectCard.findElement(By.xpath("//span/button[@aria-label='End']")).click();
+				}
+				Thread.sleep(1000);
+				cusChat("Hello");
+				Thread.sleep(1000);
+				agentChat("Hello Cust");
+				Thread.sleep(1000);
+				
+				//Close
+				selectCard.findElement(By.xpath("//*[contains(@id,'ow_Card_End_btn')]")).click();
+				WebElement drpAgentStatus = driver.findElement(By.xpath("//*[@id='ow_agent_dropdown_menu']/md-menu-button/button"));
+				Thread.sleep(2000);
+				drpAgentStatus.click();
+				Thread.sleep(2000);
+				driver.findElement(By.xpath("//*[@id='ow_finish_work']")).click();
+				Thread.sleep(2000);
+				drpAgentStatus.click();
+				Thread.sleep(2000);
+				driver.findElement(By.xpath("//*[@id='ow_exit']")).click();
+				Thread.sleep(7000);
+				
+	}
 
 	@BeforeMethod
 	public void Setup() {
@@ -46,41 +127,7 @@ public class WorkspaceEWC {
 
 	@AfterMethod
 	public void TearDown() {
-		// driver.close();
-	}
-
-	@Test
-	public void EWC() throws InterruptedException {
-		// Login
-		driver.findElement(By.id("username")).sendKeys(username);
-		driver.findElement(By.id("password")).sendKeys(password);
-		driver.findElement(By.id("login-button")).click();
-		// Wait for load
-		Thread.sleep(5000);
-		// Active
-		waits.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@type='submit']"))).click();
-		Thread.sleep(2000);
-		// Start work
-		try {
-			driver.findElement(By.xpath("//*[@type='button'][@aria-label='Start Work']")).click();
-		} catch (NoSuchElementException e) {
-		}
-		// Check agent status
-		Thread.sleep(2000);
-		String agentStatus = driver.findElement(By.xpath("//div[@id='ow_Icon_State2']")).getText();
-		System.out.println("agentStatus: " + agentStatus);
-		if (!agentStatus.startsWith("READY")) {
-			driver.findElement(By.xpath("//*[@id='ow_agent_dropdown_menu']/md-menu-button/button")).click();
-			Thread.sleep(1000);
-			driver.findElement(By.xpath("//*[@id='ow_go_ready']")).click();
-		}
-		// current WS tab
-		wsID = driver.getWindowHandle();
-		// Open EWC tab
-		ewcID = chatSetUp();
-		Thread.sleep(1000);
-
-
+		driver.quit();
 	}
 
 	public String chatSetUp() throws InterruptedException {
@@ -126,13 +173,18 @@ public class WorkspaceEWC {
 
 	public void cusChat(String message) {
 		driver.switchTo().window(ewcID);
+		WebDriverWait waits = new WebDriverWait(driver, 60);
 		waits.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='outmessage']")));
-		driver.findElement(By.xpath("//*[@id='outmessage']")).sendKeys(message);
+		WebElement action =driver.findElement(By.xpath("//*[@id='outmessage']"));
+		action.sendKeys(message);
+		action.sendKeys(Keys.ENTER);
 	}
 
 	public void agentChat(String message) {
 		driver.switchTo().window(wsID);
-		driver.findElement(By.xpath("//div[@class='limited-input__container']/textarea")).sendKeys(message);
+		WebElement action = driver.findElement(By.xpath("//div[@class='limited-input__container']/textarea"));
+		action.sendKeys(message);
+		action.sendKeys(Keys.ENTER);
 	}
 
 	public static void Hover(WebDriver driver, WebElement element) {
@@ -141,10 +193,10 @@ public class WorkspaceEWC {
 	}
 
 	public void openTab(String URL) {
+		String currWindow = driver.getWindowHandle();
 		((JavascriptExecutor) driver).executeScript("window.open()");
 		windows = driver.getWindowHandles();
 		System.out.println("windows" + windows.toString());
-		String currWindow = driver.getWindowHandle();
 		itr = windows.iterator();
 		while (itr.hasNext()) {
 			String itrWindow = itr.next();
@@ -158,11 +210,4 @@ public class WorkspaceEWC {
 		}
 
 	}
-
-	public void EWCpage(String URL, String linkCheck, String skillset) {
-
-	}
-
 }
-
-//}
