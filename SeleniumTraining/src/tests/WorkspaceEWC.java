@@ -134,16 +134,14 @@ public class WorkspaceEWC {
 	}
 
 	@Test
-	public void testChat() throws InterruptedException {
-		chat("111");
+	public void testSetup() throws InterruptedException {
+		boolean a =chatSetUp();
 	}
-
-	public void chat(String message) throws InterruptedException {
+	public boolean chatSetUp() throws InterruptedException {
 		openTab(webchatURL);
 		String ewcID = driver.getWindowHandle();
-		if (driver.findElement(By.xpath("//*[@id='chatPanel']/a")).isDisplayed()) {
-			driver.findElement(By.xpath("//*[@id='chatPanel']/a")).click();
-		} else {
+		Thread.sleep(1000);
+		if (!(driver.findElement(By.xpath("//*[@id='chatPanel']/a")).isDisplayed())) {
 			openTab(checkLink);
 			try {
 				Thread.sleep(1000);
@@ -155,14 +153,21 @@ public class WorkspaceEWC {
 			}
 			driver.close();
 			driver.switchTo().window(ewcID);
+			Thread.sleep(1000);
 			driver.navigate().refresh();
 			Thread.sleep(1000);
-			if (driver.findElement(By.xpath("//*[@id='chatPanel']/a")).isDisplayed()) {
-				driver.findElement(By.xpath("//*[@id='chatPanel']/a")).click();
-			} else {
+			if (!(driver.findElement(By.xpath("//*[@id='chatPanel']/a")).isDisplayed())) {
 				System.out.println("khong tim thay skillset nao");
+				return false;
 			}
 		}
+		driver.findElement(By.xpath("//*[@id='chatPanel']/a")).click();
+		Thread.sleep(1000);
+		return true;
+	}
+
+	public void sendChat(String message) {
+
 	}
 
 	public static void Hover(WebDriver driver, WebElement element) {
