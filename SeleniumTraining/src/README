@@ -11,6 +11,7 @@ https://www.howkteam.vn/course/excute-javascript-voi-selenium/excute-javascript-
 Tai lieu
 Stackoverflow ,Guru99 hay ToolSQA
 
+=============
 Cac windows: List String
 
 		Set<String> windows = driver.getWindowHandles();
@@ -20,3 +21,6 @@ Cac windows: List String
 		List<String> winList = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println(windows);
 		System.out.println(winList);
+		
+===============
+https://stackoverflow.com/questions/32971546/how-to-wait-for-input-element-enabled-in-selenium-webdriver

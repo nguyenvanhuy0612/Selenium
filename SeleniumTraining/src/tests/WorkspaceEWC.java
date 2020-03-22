@@ -1,8 +1,6 @@
 package tests;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -24,13 +22,17 @@ public class WorkspaceEWC {
 	WebDriver driver;
 	Set<String> windows;
 	Iterator<String> itr;
+	WebDriverWait waits = new WebDriverWait(driver, 60);
+	String wsID;
+	String ewcID;
 	String wsURL = "http://100.30.5.92:31380/Login/?returnpage=../services/UnifiedAgentController/workspaces/";// "http://100.30.6.137:31380/Login/?returnpage=../services/UnifiedAgentController/workspaces/";
 	String webchatURL = "http://10.30.1.210:81/ewcsite%20-%20mcha576%20link/";// "http://10.30.1.236:8080/ewcsite/";
 	String checkLink = "https://100.30.5.76:8445/CustomerControllerWeb/currentqueue";// "https://autosrv98:8445/CustomerControllerWeb/callback";
 	String username = "aoc\\nvhuy0002"; // "ACC_Huy@automation";
 	String password = "1_Abc_123";
-	String skillset = "WC_Webchat2";// "WC_HUY_1";
-	String customerEmail = "huy@gmail.com";
+	String skillset = "WC_Webchat3";// "WC_HUY_1";
+	String cusEmail = "huy@gmail.com";
+	String cusName = "huy";
 
 	@BeforeMethod
 	public void Setup() {
@@ -39,6 +41,7 @@ public class WorkspaceEWC {
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get(wsURL);
+		wsID = driver.getWindowHandle();
 	}
 
 	@AfterMethod
@@ -46,40 +49,22 @@ public class WorkspaceEWC {
 		// driver.close();
 	}
 
-	// @Test
+	@Test
 	public void EWC() throws InterruptedException {
-		// Thong so test
-		WebDriverWait waits = new WebDriverWait(driver, 60);
-		windows = driver.getWindowHandles();
-
 		// Login
 		driver.findElement(By.id("username")).sendKeys(username);
 		driver.findElement(By.id("password")).sendKeys(password);
 		driver.findElement(By.id("login-button")).click();
-
 		// Wait for load
 		Thread.sleep(5000);
-
 		// Active
 		waits.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@type='submit']"))).click();
-
 		Thread.sleep(2000);
 		// Start work
 		try {
 			driver.findElement(By.xpath("//*[@type='button'][@aria-label='Start Work']")).click();
 		} catch (NoSuchElementException e) {
-			// System.out.println(e.toString());
 		}
-
-		/*
-		 * // Start work if (!driver.findElements(By.
-		 * xpath("//*[@type='button'][@aria-label='Start Work']")).isEmpty()) { // THEN
-		 * CLICK ON THE START WORK BUTTON
-		 * driver.findElement(By.xpath("//*[@type='button'][@aria-label='Start Work']"))
-		 * .click(); } else { // DO SOMETHING ELSE AS STARTWORK BUTTON IS NOT THERE
-		 * System.out.println("Message: No need start work"); }
-		 */
-
 		// Check agent status
 		Thread.sleep(2000);
 		String agentStatus = driver.findElement(By.xpath("//div[@id='ow_Icon_State2']")).getText();
@@ -89,57 +74,18 @@ public class WorkspaceEWC {
 			Thread.sleep(1000);
 			driver.findElement(By.xpath("//*[@id='ow_go_ready']")).click();
 		}
-
 		// current WS tab
-
+		wsID = driver.getWindowHandle();
 		// Open EWC tab
+		ewcID = chatSetUp();
 		Thread.sleep(1000);
 
-		// Check link EWC
-		Thread.sleep(1000);
-
-		try {
-			driver.findElement(By.xpath("//*[@id='details-button']")).click();
-			Thread.sleep(1000);
-			driver.findElement(By.xpath("//*[@id='proceed-link']")).click();
-			Thread.sleep(1000);
-		} catch (NoSuchElementException e) {
-		}
-		// Close check link EWC
-		driver.close();
-
-		// return to EWC tab
-
-		driver.navigate().refresh();
-		Thread.sleep(1000);
-
-		// Initial chat
-		driver.findElement(By.xpath("//*[@id='chatPanel']/a")).click();
-
-		Select drpSkillset = new Select(driver.findElement(By.cssSelector("#skillset-chat")));
-		drpSkillset.selectByVisibleText(skillset);
-
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//*[@id='openbutton-chat']/span")).click();
-
-		driver.switchTo().alert().accept();
-
-		// sw to ws tab
-		Thread.sleep(1000);
-
-		waits.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='ow_card_accept_btn']")));
-
-		driver.findElement(By.xpath("//*[@id='ow_card_accept_btn']")).click();
 
 	}
 
-	@Test
-	public void testSetup() throws InterruptedException {
-		boolean a =chatSetUp();
-	}
-	public boolean chatSetUp() throws InterruptedException {
+	public String chatSetUp() throws InterruptedException {
 		openTab(webchatURL);
-		String ewcID = driver.getWindowHandle();
+		ewcID = driver.getWindowHandle();
 		Thread.sleep(1000);
 		if (!(driver.findElement(By.xpath("//*[@id='chatPanel']/a")).isDisplayed())) {
 			openTab(checkLink);
@@ -157,17 +103,36 @@ public class WorkspaceEWC {
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 			if (!(driver.findElement(By.xpath("//*[@id='chatPanel']/a")).isDisplayed())) {
-				System.out.println("khong tim thay skillset nao");
-				return false;
+				System.out.println("Khong tim thay skillset nao");
+				return ewcID;
 			}
 		}
 		driver.findElement(By.xpath("//*[@id='chatPanel']/a")).click();
 		Thread.sleep(1000);
-		return true;
+		// Form chat
+		WebElement chatForm = driver.findElement(By.xpath("//*[@id='chatForm']"));
+		// cusName
+		chatForm.findElement(By.xpath("//*[@id='user-chat']")).sendKeys(cusName);
+		// cusEmail
+		chatForm.findElement(By.xpath("//*[@id='email-chat']")).sendKeys(cusEmail);
+		// Skillset
+		Select drpSkill = new Select(chatForm.findElement(By.xpath("//*[@id='skillset-chat']")));
+		drpSkill.selectByVisibleText(skillset);
+		Thread.sleep(500);
+		chatForm.findElement(By.xpath("//*[@id='openbutton-chat']")).click();
+		Thread.sleep(500);
+		return ewcID;
 	}
 
-	public void sendChat(String message) {
+	public void cusChat(String message) {
+		driver.switchTo().window(ewcID);
+		waits.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='outmessage']")));
+		driver.findElement(By.xpath("//*[@id='outmessage']")).sendKeys(message);
+	}
 
+	public void agentChat(String message) {
+		driver.switchTo().window(wsID);
+		driver.findElement(By.xpath("//div[@class='limited-input__container']/textarea")).sendKeys(message);
 	}
 
 	public static void Hover(WebDriver driver, WebElement element) {
