@@ -26,7 +26,7 @@ public class WorkspaceEWC {
 	Iterator<String> itr;
 	String wsURL = "http://100.30.5.92:31380/Login/?returnpage=../services/UnifiedAgentController/workspaces/";// "http://100.30.6.137:31380/Login/?returnpage=../services/UnifiedAgentController/workspaces/";
 	String webchatURL = "http://10.30.1.210:81/ewcsite%20-%20mcha576%20link/";// "http://10.30.1.236:8080/ewcsite/";
-	String checkLink = "https://mcha576.aoc.com:8445/CustomerControllerWeb/currentqueue";// "https://autosrv98:8445/CustomerControllerWeb/callback";
+	String checkLink = "https://100.30.5.76:8445/CustomerControllerWeb/currentqueue";// "https://autosrv98:8445/CustomerControllerWeb/callback";
 	String username = "aoc\\nvhuy0002"; // "ACC_Huy@automation";
 	String password = "1_Abc_123";
 	String skillset = "WC_Webchat2";// "WC_HUY_1";
@@ -140,7 +140,29 @@ public class WorkspaceEWC {
 
 	public void chat(String message) throws InterruptedException {
 		openTab(webchatURL);
-		
+		String ewcID = driver.getWindowHandle();
+		if (driver.findElement(By.xpath("//*[@id='chatPanel']/a")).isDisplayed()) {
+			driver.findElement(By.xpath("//*[@id='chatPanel']/a")).click();
+		} else {
+			openTab(checkLink);
+			try {
+				Thread.sleep(1000);
+				driver.findElement(By.xpath("//*[@id='details-button']")).click();
+				Thread.sleep(500);
+				driver.findElement(By.xpath("//*[@id='proceed-link']")).click();
+				Thread.sleep(500);
+			} catch (Exception e) {
+			}
+			driver.close();
+			driver.switchTo().window(ewcID);
+			driver.navigate().refresh();
+			Thread.sleep(1000);
+			if (driver.findElement(By.xpath("//*[@id='chatPanel']/a")).isDisplayed()) {
+				driver.findElement(By.xpath("//*[@id='chatPanel']/a")).click();
+			} else {
+				System.out.println("khong tim thay skillset nao");
+			}
+		}
 	}
 
 	public static void Hover(WebDriver driver, WebElement element) {
@@ -159,6 +181,7 @@ public class WorkspaceEWC {
 			if (itrWindow.equalsIgnoreCase(currWindow)) {
 				itrWindow = itr.next();
 				driver.switchTo().window(itrWindow);
+				System.out.println("NEW TAB WITH ID: " + driver.getWindowHandle());
 				driver.get(URL);
 				break;
 			}
