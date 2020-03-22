@@ -1,56 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" ignored="0" total="1" passed="0">
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="71" started-at="2020-03-22T21:00:43 ICT" finished-at="2020-03-22T21:00:43 ICT">
+  <suite name="Default suite" duration-ms="7422" started-at="2020-03-22T21:13:57 ICT" finished-at="2020-03-22T21:14:04 ICT">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="71" started-at="2020-03-22T21:00:43 ICT" finished-at="2020-03-22T21:00:43 ICT">
+    <test name="Default test" duration-ms="7422" started-at="2020-03-22T21:13:57 ICT" finished-at="2020-03-22T21:14:04 ICT">
       <class name="tests.WorkspaceEWC">
-        <test-method status="FAIL" signature="chat(java.lang.String)[pri:0, instance:tests.WorkspaceEWC@6771beb3]" name="chat" duration-ms="0" started-at="2020-03-22T21:00:43 ICT" finished-at="2020-03-22T21:00:43 ICT">
-          <exception class="org.testng.TestNGException">
-            <message>
-              <![CDATA[
-Cannot inject @Test annotated Method [chat] with [class java.lang.String].
-For more information on native dependency injection please refer to https://testng.org/doc/documentation-main.html#native-dependency-injection]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.TestNGException: 
-Cannot inject @Test annotated Method [chat] with [class java.lang.String].
-For more information on native dependency injection please refer to https://testng.org/doc/documentation-main.html#native-dependency-injection
-at org.testng.internal.Parameters.checkParameterTypes(Parameters.java:437)
-at org.testng.internal.Parameters.createParametersForMethod(Parameters.java:351)
-at org.testng.internal.Parameters.createParameters(Parameters.java:708)
-at org.testng.internal.Parameters.handleParameters(Parameters.java:875)
-at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
-at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
-at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:788)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.util.ArrayList.forEach(ArrayList.java:1257)
-at org.testng.TestRunner.privateRun(TestRunner.java:767)
-at org.testng.TestRunner.run(TestRunner.java:588)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:384)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:378)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:337)
-at org.testng.SuiteRunner.run(SuiteRunner.java:286)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1214)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1136)
-at org.testng.TestNG.runSuites(TestNG.java:1066)
-at org.testng.TestNG.run(TestNG.java:1034)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.TestNGException -->
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.WorkspaceEWC@35d176f7]" name="Setup" is-config="true" duration-ms="5073" started-at="2020-03-22T21:13:57 ICT" finished-at="2020-03-22T21:14:02 ICT">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- chat -->
+        </test-method> <!-- Setup -->
+        <test-method status="PASS" signature="testChat()[pri:0, instance:tests.WorkspaceEWC@35d176f7]" name="testChat" duration-ms="2232" started-at="2020-03-22T21:14:02 ICT" finished-at="2020-03-22T21:14:04 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testChat -->
+        <test-method status="PASS" signature="TearDown()[pri:0, instance:tests.WorkspaceEWC@35d176f7]" name="TearDown" is-config="true" duration-ms="1" started-at="2020-03-22T21:14:04 ICT" finished-at="2020-03-22T21:14:04 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TearDown -->
       </class> <!-- tests.WorkspaceEWC -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
