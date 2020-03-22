@@ -5,8 +5,8 @@
     <classes>
       <class name="tests.WorkspaceEWC">
         <methods>
+          <include name="chat"/>
           <include name="TearDown"/>
-          <include name="EWC"/>
           <include name="Setup"/>
         </methods>
       </class> <!-- tests.WorkspaceEWC -->
