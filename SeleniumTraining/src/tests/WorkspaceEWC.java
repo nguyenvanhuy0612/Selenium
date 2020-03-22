@@ -140,6 +140,7 @@ public class WorkspaceEWC {
 
 	public void chat(String message) throws InterruptedException {
 		openTab(webchatURL);
+		
 	}
 
 	public static void Hover(WebDriver driver, WebElement element) {
