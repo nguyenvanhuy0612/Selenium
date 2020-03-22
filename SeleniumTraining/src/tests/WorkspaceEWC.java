@@ -29,8 +29,21 @@ public class WorkspaceEWC {
 	String password = "1_Abc_123";
 	String skillset = "WC_Webchat2";// "WC_HUY_1";
 	String customerEmail = "huy@gmail.com";
-
-	@Test
+	
+	@BeforeMethod
+	public void Setup() {
+		driver = utilities.DriverFactory.CreateDriver("chrome");
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		driver.get(wsURL);
+	}
+	
+	@AfterMethod
+	public void TearDown() {
+		// driver.close();
+	}
+	//@Test
 	public void EWC() throws InterruptedException {
 		// Thong so test
 		WebDriverWait waits = new WebDriverWait(driver, 60);
@@ -116,20 +129,13 @@ public class WorkspaceEWC {
 		driver.findElement(By.xpath("//*[@id='ow_card_accept_btn']")).click();
 
 	}
-
-	@BeforeMethod
-	public void Setup() {
-		driver = utilities.DriverFactory.CreateDriver("chrome");
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
-		driver.get(wsURL);
+	@Test
+	public void chat(String message) throws InterruptedException{
+		openTab(webchatURL);
 	}
+	
 
-	@AfterMethod
-	public void TearDown() {
-		// driver.close();
-	}
+
 
 	public static void Hover(WebDriver driver, WebElement element) {
 		Actions action = new Actions(driver);
