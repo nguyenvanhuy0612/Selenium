@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="59592" started-at="2020-03-23T09:43:19 ICT" finished-at="2020-03-23T09:44:19 ICT">
+  <suite name="Default suite" duration-ms="58619" started-at="2020-03-23T11:25:23 ICT" finished-at="2020-03-23T11:26:22 ICT">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="59592" started-at="2020-03-23T09:43:19 ICT" finished-at="2020-03-23T09:44:19 ICT">
+    <test name="Default test" duration-ms="58619" started-at="2020-03-23T11:25:23 ICT" finished-at="2020-03-23T11:26:22 ICT">
       <class name="tests.WorkspaceEWC">
-        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.WorkspaceEWC@578486a3]" name="Setup" is-config="true" duration-ms="5116" started-at="2020-03-23T09:43:19 ICT" finished-at="2020-03-23T09:43:24 ICT">
+        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.WorkspaceEWC@578486a3]" name="Setup" is-config="true" duration-ms="4771" started-at="2020-03-23T11:25:23 ICT" finished-at="2020-03-23T11:25:28 ICT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="EWC()[pri:0, instance:tests.WorkspaceEWC@578486a3]" name="EWC" duration-ms="53705" started-at="2020-03-23T09:43:24 ICT" finished-at="2020-03-23T09:44:18 ICT">
+        <test-method status="PASS" signature="EWC()[pri:0, instance:tests.WorkspaceEWC@578486a3]" name="EWC" duration-ms="52998" started-at="2020-03-23T11:25:28 ICT" finished-at="2020-03-23T11:26:21 ICT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- EWC -->
-        <test-method status="PASS" signature="TearDown()[pri:0, instance:tests.WorkspaceEWC@578486a3]" name="TearDown" is-config="true" duration-ms="700" started-at="2020-03-23T09:44:18 ICT" finished-at="2020-03-23T09:44:19 ICT">
+        <test-method status="PASS" signature="TearDown()[pri:0, instance:tests.WorkspaceEWC@578486a3]" name="TearDown" is-config="true" duration-ms="797" started-at="2020-03-23T11:26:21 ICT" finished-at="2020-03-23T11:26:22 ICT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TearDown -->

@@ -38,10 +38,7 @@ public class WorkspaceEWC {
 
 	@Test
 	public void EWC() throws InterruptedException {
-		WebDriverWait waits = new WebDriverWait(driver, 60);
-		// Wait wait = new FluentWait(driver).withTimeout(30,
-		// TimeUnit.SECONDS).pollingEvery(5,
-		// TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
+		WebDriverWait explicitWait = new WebDriverWait(driver, 60);
 		// Login
 		driver.findElement(By.id("username")).sendKeys(username);
 		driver.findElement(By.id("password")).sendKeys(password);
@@ -49,7 +46,7 @@ public class WorkspaceEWC {
 		// Wait for load
 		Thread.sleep(5000);
 		// Active
-		waits.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@type='submit']"))).click();
+		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@type='submit']"))).click();
 		Thread.sleep(2000);
 		// Start work
 		try {
@@ -77,7 +74,7 @@ public class WorkspaceEWC {
 		Thread.sleep(1000);
 		// Chon card group
 		WebElement selectCard = null;
-		waits.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//card-group")));
+		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//card-group")));
 		List<WebElement> cardgroup = driver.findElements(By.xpath("//card-group"));
 		for (int i = 0; i <= cardgroup.size(); i++) {
 			WebElement curCard = cardgroup.get(i);
@@ -98,10 +95,9 @@ public class WorkspaceEWC {
 		}
 		// Hoi thoai
 		// ===========================================================================================================
-		// //
 		Thread.sleep(2000);
 		cusChat("Hello");
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		agentChat("Hello Cust");
 		Thread.sleep(2000);
 
@@ -112,12 +108,13 @@ public class WorkspaceEWC {
 		Thread.sleep(2000);
 		drpAgentStatus.click();
 		Thread.sleep(2000);
-		waits.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[@id='ow_finish_work']"))))
+		explicitWait.until(
+				ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[@id='ow_finish_work']"))))
 				.click();
 		Thread.sleep(2000);
 		drpAgentStatus.click();
 		Thread.sleep(2000);
-		waits.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[@id='ow_exit']"))))
+		explicitWait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[@id='ow_exit']"))))
 				.click();
 		Thread.sleep(7000);
 
@@ -179,8 +176,9 @@ public class WorkspaceEWC {
 		return ewcID;
 	}
 
-	public void cusChat(String message) {
+	public void cusChat(String message) throws InterruptedException {
 		driver.switchTo().window(ewcID);
+		Thread.sleep(1000);
 		WebDriverWait waits = new WebDriverWait(driver, 60);
 		waits.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='outmessage']")));
 		WebElement action = driver.findElement(By.xpath("//*[@id='outmessage']"));
@@ -188,8 +186,9 @@ public class WorkspaceEWC {
 		action.sendKeys(Keys.ENTER);
 	}
 
-	public void agentChat(String message) {
+	public void agentChat(String message) throws InterruptedException {
 		driver.switchTo().window(wsID);
+		Thread.sleep(1000);
 		WebElement action = driver.findElement(By.xpath("//div[@class='limited-input__container']/textarea"));
 		action.sendKeys(message);
 		action.sendKeys(Keys.ENTER);
