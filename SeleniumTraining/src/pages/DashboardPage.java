@@ -14,7 +14,7 @@ public class DashboardPage {
 		driver.findElement(By.linkText("Change password")).click();
 	}
 
-	public DashboardPage(WebDriver Indriver) {
-		this.driver = Indriver;
+	public DashboardPage(WebDriver driver) {
+		this.driver = driver;
 	}
 }

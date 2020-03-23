@@ -18,7 +18,7 @@ public class LoginPage {
 		driver.findElement(By.xpath("//*[@id='MainContent_btnLogin']")).click();
 	}
 
-	public LoginPage(WebDriver Indriver) {
-		this.driver = Indriver;
+	public LoginPage(WebDriver driver) {
+		this.driver = driver;
 	}
 }

@@ -9,9 +9,9 @@ import org.openqa.selenium.WebDriver;
 import pages.DashboardPage;
 import pages.LoginPage;
 
-public class POMExample {
+public class Login {
 	@Test
-	public void testPOM() {
+	public void POMExample() {
 
 		// 1. driver
 		WebDriver driver = utilities.DriverFactory.CreateDriver("chrome");
