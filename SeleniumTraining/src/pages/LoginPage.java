@@ -1,0 +1,24 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class LoginPage {
+	WebDriver driver;
+
+	public void setUserName(String username) {
+		driver.findElement(By.xpath("//*[@id='MainContent_txtUserName']")).sendKeys(username);
+	}
+
+	public void setPassword(String password) {
+		driver.findElement(By.xpath("//*[@id='MainContent_txtPassword']")).sendKeys(password);
+	}
+
+	public void clickSubmit() {
+		driver.findElement(By.xpath("//*[@id='MainContent_btnLogin']")).click();
+	}
+
+	public LoginPage(WebDriver Indriver) {
+		this.driver = Indriver;
+	}
+}
