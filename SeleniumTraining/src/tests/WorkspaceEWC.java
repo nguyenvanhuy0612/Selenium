@@ -107,11 +107,11 @@ public class WorkspaceEWC {
 				Thread.sleep(2000);
 				drpAgentStatus.click();
 				Thread.sleep(2000);
-				driver.findElement(By.xpath("//*[@id='ow_finish_work']")).click();
+				waits.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[@id='ow_finish_work']")))).click();
 				Thread.sleep(2000);
 				drpAgentStatus.click();
 				Thread.sleep(2000);
-				driver.findElement(By.xpath("//*[@id='ow_exit']")).click();
+				waits.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[@id='ow_exit']")))).click();
 				Thread.sleep(7000);
 				
 	}
