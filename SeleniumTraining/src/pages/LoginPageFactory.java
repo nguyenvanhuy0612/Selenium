@@ -39,8 +39,8 @@ public class LoginPageFactory {
 
 	public LoginPageFactory(WebDriver driver) {
 		this.driver = driver;
-		
-		//WebElement
+
+		// WebElement
 		PageFactory.initElements(driver, this);
 	}
 }

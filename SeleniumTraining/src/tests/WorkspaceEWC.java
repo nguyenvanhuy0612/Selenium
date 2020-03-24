@@ -75,7 +75,12 @@ public class WorkspaceEWC {
 		// Chon card group
 		WebElement selectCard = null;
 		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//card-group")));
+		Thread.sleep(3000);
 		List<WebElement> cardgroup = driver.findElements(By.xpath("//card-group"));
+		
+		//explicitWait.until(ExpectedConditions.visibilityOfAllElements(cardgroup));
+		System.out.println("cardgroup.size(): " + cardgroup.size());
+		
 		for (int i = 0; i <= cardgroup.size(); i++) {
 			WebElement curCard = cardgroup.get(i);
 			if (selectCard == null) {
