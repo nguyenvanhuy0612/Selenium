@@ -52,6 +52,40 @@ driver.findElement(element).click();
 		
 		
 		
+Gherkin
+
+https://viblo.asia/p/gherkin-la-gi-viet-gherkin-test-trong-cucumber-gAm5yXwXldb
+https://www.guru99.com/gherkin-test-cucumber.html
+https://code4shares.wordpress.com/2016/07/24/ap-dung-behavior-driven-develop-cho-du-an-agile-phan-2/
+
+http://www.seleniumframework.com/cucumber-jvm-3/cucumber-jvm-and-selenium/
+https://www.toolsqa.com/cucumber-tutorial/
+https://sukesh15.gitbooks.io/cucumber-jvm-test-framework-/content/index.html
+https://cucumber.io/
+
+
+https://www.toolsqa.com/cucumber/cucumber-options/
+
+https://testingneeds.wordpress.com/2015/09/15/junit-runner-with-cucumberoptions/ :Running Scenarios without Tag
+
+Template
+
+Feature: [One line describing the story]
+
+[Optional — Feature description]
+
+Scenario: [One line describing the scenario]
+
+Given [context]
+
+And [some more context]…
+
+When [event]
+
+Then [outcome]
+
+And [another outcome]…
+
 		
 		
 		
