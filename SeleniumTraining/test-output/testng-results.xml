@@ -1,25 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="74648" started-at="2020-03-23T17:37:09 ICT" finished-at="2020-03-23T17:38:23 ICT">
+  <suite name="SDET TEST" duration-ms="20861" started-at="2020-03-26T13:04:14 ICT" finished-at="2020-03-26T13:04:35 ICT">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="74648" started-at="2020-03-23T17:37:09 ICT" finished-at="2020-03-23T17:38:23 ICT">
-      <class name="tests.WorkspaceEWC">
-        <test-method status="PASS" signature="Setup()[pri:0, instance:tests.WorkspaceEWC@578486a3]" name="Setup" is-config="true" duration-ms="4978" started-at="2020-03-23T17:37:09 ICT" finished-at="2020-03-23T17:37:14 ICT">
+    <test name="Test1 - Home page" duration-ms="13993" started-at="2020-03-26T13:04:14 ICT" finished-at="2020-03-26T13:04:28 ICT">
+      <class name="smoketests.ATagsTest">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:smoketests.ATagsTest@67784306]" name="setUp" is-config="true" duration-ms="8600" started-at="2020-03-26T13:04:14 ICT" finished-at="2020-03-26T13:04:23 ICT">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Setup -->
-        <test-method status="PASS" signature="EWC()[pri:0, instance:tests.WorkspaceEWC@578486a3]" name="EWC" duration-ms="68815" started-at="2020-03-23T17:37:14 ICT" finished-at="2020-03-23T17:38:23 ICT">
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="loginElementsPresentTest()[pri:0, instance:smoketests.ATagsTest@67784306]" name="loginElementsPresentTest" duration-ms="205" started-at="2020-03-26T13:04:23 ICT" finished-at="2020-03-26T13:04:23 ICT">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- EWC -->
-        <test-method status="PASS" signature="TearDown()[pri:0, instance:tests.WorkspaceEWC@578486a3]" name="TearDown" is-config="true" duration-ms="785" started-at="2020-03-23T17:38:23 ICT" finished-at="2020-03-23T17:38:23 ICT">
+        </test-method> <!-- loginElementsPresentTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:smoketests.ATagsTest@67784306]" name="tearDown" is-config="true" duration-ms="181" started-at="2020-03-26T13:04:23 ICT" finished-at="2020-03-26T13:04:23 ICT">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TearDown -->
-      </class> <!-- tests.WorkspaceEWC -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+        </test-method> <!-- tearDown -->
+      </class> <!-- smoketests.ATagsTest -->
+      <class name="smoketests.loginPresentTestNG">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:smoketests.loginPresentTestNG@335eadca]" name="setUp" is-config="true" duration-ms="4387" started-at="2020-03-26T13:04:23 ICT" finished-at="2020-03-26T13:04:28 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="loginElementsPresentTest()[pri:0, instance:smoketests.loginPresentTestNG@335eadca]" name="loginElementsPresentTest" duration-ms="355" started-at="2020-03-26T13:04:28 ICT" finished-at="2020-03-26T13:04:28 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginElementsPresentTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:smoketests.loginPresentTestNG@335eadca]" name="tearDown" is-config="true" duration-ms="182" started-at="2020-03-26T13:04:28 ICT" finished-at="2020-03-26T13:04:28 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- smoketests.loginPresentTestNG -->
+    </test> <!-- Test1 - Home page -->
+    <test name="Test2 - login" duration-ms="6805" started-at="2020-03-26T13:04:28 ICT" finished-at="2020-03-26T13:04:35 ICT">
+      <class name="smoketests.loginPresentTestNG">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:smoketests.loginPresentTestNG@35d176f7]" name="setUp" is-config="true" duration-ms="6474" started-at="2020-03-26T13:04:28 ICT" finished-at="2020-03-26T13:04:35 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="loginElementsPresentTest()[pri:0, instance:smoketests.loginPresentTestNG@35d176f7]" name="loginElementsPresentTest" duration-ms="159" started-at="2020-03-26T13:04:35 ICT" finished-at="2020-03-26T13:04:35 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginElementsPresentTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:smoketests.loginPresentTestNG@35d176f7]" name="tearDown" is-config="true" duration-ms="161" started-at="2020-03-26T13:04:35 ICT" finished-at="2020-03-26T13:04:35 ICT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- smoketests.loginPresentTestNG -->
+    </test> <!-- Test2 - login -->
+  </suite> <!-- SDET TEST -->
 </testng-results>
