@@ -1,0 +1,47 @@
+1, Implicit Wait in Selenium
+import java.util.concurrent.TimeUnit;
+driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
+2, Explicit Wait in Selenium
+In order to declare explicit wait, one has to use “ExpectedConditions”. The following Expected Conditions can be used in Explicit Wait.
+
+alertlsPresent()
+elementSelectionStateToBe()
+elementToBeClickable()
+elementToBeSelected()
+frameToBeAvaliableAndSwitchToIt()
+invisibilityOfTheElementLocated()
+invisibilityOfElementWithText()
+presenceOfAllElementsLocatedBy()
+presenceOfElementLocated()
+textToBePresentInElement()
+textToBePresentInElementLocated()
+textToBePresentInElementValue()
+titleIs()
+titleContains()
+visibilityOf()
+visibilityOfAllElements()
+visibilityOfAllElementsLocatedBy()
+visibilityOfElementLocated()
+
+import org.openqa.selenium.support.ui.ExpectedConditions
+import org.openqa.selenium.support.ui.WebDriverWait
+
+
+WebDriverWait wait = new WebDriverWait(driver,30);
+
+3, FluentWait
+// Sẽ chờ 30 giây để mỗi element hiển thị trên page 
+// và sẽ thực hiện lặp lại mỗi 5 giây nếu chưa tìm thấy phần tử đó
+ 
+Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+ .withTimeout(30, SECONDS)
+ .pollingEvery(5, SECONDS)
+ .ignoring(NoSuchElementException.class);
+
+WebElement foo = wait.until(new Function<WebDriver, WebElement>() 
+{
+ public WebElement apply(WebDriver driver) {
+ return driver.findElement(By.id("foo"));
+}
+});

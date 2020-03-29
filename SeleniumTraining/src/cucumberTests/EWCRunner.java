@@ -6,7 +6,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "EWCfeatures", glue = "stepEWC")
+@CucumberOptions(features = "EWCfeatures", glue = "stepEWC",tags = "@Accept_sametime")
 public class EWCRunner {
 
 }

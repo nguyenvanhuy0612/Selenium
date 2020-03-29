@@ -38,6 +38,11 @@ Cac windows: List String
 		System.out.println(windows);
 		System.out.println(winList);
 		
+		
+		====
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(0));
+		
 ===============
 https://stackoverflow.com/questions/32971546/how-to-wait-for-input-element-enabled-in-selenium-webdriver
 
