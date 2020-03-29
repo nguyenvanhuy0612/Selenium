@@ -60,10 +60,7 @@ public class EWCChat {
 		System.out.println("agentStatus: " + agentStatus);
 		// Go ready
 		if (!agentStatus.startsWith("READY")) {
-			driver.findElement(By.xpath("//*[@id='ow_agent_dropdown_menu']/md-menu-button/button")).click();
-			Thread.sleep(1000);
-			driver.findElement(By.xpath("//*[@id='ow_go_ready']")).click();
-			Thread.sleep(1000);
+			goReady();
 		}
 	}
 
@@ -112,9 +109,9 @@ public class EWCChat {
 		// Skillset
 		Select drpSkill = new Select(chatForm.findElement(By.xpath("//*[@id='skillset-chat']")));
 		drpSkill.selectByVisibleText(skillset);
-		Thread.sleep(200);
+		Thread.sleep(500);
 		chatForm.findElement(By.xpath("//*[@id='openbutton-chat']")).click();
-		Thread.sleep(200);
+		Thread.sleep(1000);
 	}
 
 	@And("^agent accepts$")
@@ -127,54 +124,103 @@ public class EWCChat {
 	@And("^agent accepts (.+)$")
 	public void agentAccepts(String email) throws InterruptedException {
 		System.out.println("agentAccept cus with email " + email);
-		WebElement card = agentAccept(email);
-		card.findElement(By.xpath("//*[@id='ow_card_accept_btn']")).click();
+		agentAccept(email);
 	}
 
-	@And("^agent (.+) with (.+)$")
+	@And("^agent chat (.+) with (.+)$")
 	public void agentChat(String chat1, String cusEmail) throws InterruptedException {
 		System.out.println("agent " + chat1 + " with " + cusEmail);
 		currAgentChat(chat1, cusEmail);
 	}
 
-	@And("^customer chat (.*)$")
-	public void cusChat(String cus1) {
-		System.out.println("cus chat: " + cus1);
+	@And("^customer with (.+) chat (.*)$")
+	public void cusChat(String cusEmail, String chat) throws NumberFormatException, InterruptedException {
+		System.out.println("cus with email " + cusEmail + " chat: " + chat);
+		for (int i = 1; i <= 9; i++) {
+			if (tabInfo[i][1].contains(cusEmail)) {
+				currCusChat(Integer.parseInt(tabInfo[i][0]), chat);
+				break;
+			}
+		}
 	}
 
 	@And("^agent switch to ewc (.*)$")
-	public void swWorkcard(String cusEmail) {
+	public void swWorkcard(String cusEmail) throws InterruptedException {
 		System.out.println("Switch to work card " + cusEmail);
+		swToWorkcard(cusEmail);
 	}
 
-	@And("^agent unhold$")
-	public void unhold() {
+	@And("^agent unhold (.+)$")
+	public void unhold(String cusEmail) throws InterruptedException {
 		System.out.println("unhold");
+		Thread.sleep(500);
+		driver.findElement(By.xpath("//button[@ng-click='unhold()']")).click();
+		Thread.sleep(1000);
 	}
 
 	@And("^agent close ewc1 and ewc2$")
-	public void closeEWC() {
+	public void closeEWC() throws InterruptedException {
 		System.out.println("Close EWC");
+		try {
+			driver.findElement(By.xpath("//button[@aria-label='End']")).click();
+			Thread.sleep(3000);
+			unhold("all");
+			Thread.sleep(3000);
+			driver.findElement(By.xpath("//button[@aria-label='End']")).click();
+			Thread.sleep(3000);
+		} catch (NoSuchElementException e) {
+			System.out.println("Close failed");
+		}
 	}
 
-	@And("^set ACW$")
-	public void setACW() {
+	@And("^set ACW (.+)$")
+	public void setACW(String iptACW) throws InterruptedException {
 		System.out.println("Set ACW");
+		driver.findElement(By.xpath("//*[@id='ow_agent_dropdown_menu']/md-menu-button/button")).click();
+		Thread.sleep(500);
+		Hover(driver, driver.findElement(By.xpath("//*[@id='ow_go_acw']")));
+		Thread.sleep(1000);
+		List<WebElement> ACWcodes = driver
+				.findElements(By.xpath("//*[contains(@id,'menu_container')]//button[@ng-click='goACW(reason.code)']"));
+		System.out.println("ACWcodes.size(): " + ACWcodes.size());
+		for (WebElement ACWcode : ACWcodes) {
+			String acwcode = ACWcode.findElement(By.xpath("./div/div[2]")).getText();
+			Thread.sleep(500);
+			System.out.println("current acwcode: " + acwcode);
+			if (acwcode.contains(iptACW)) {
+				Thread.sleep(500);
+				ACWcode.click();
+				break;
+			}
+		}
 	}
 
 	@Then("^check ACW code displayed on Workspaces$")
-	public void checkACW() {
+	public void checkACW() throws InterruptedException {
 		System.out.println("Check ACW");
+		Thread.sleep(2000);
+		String acw = driver.findElement(By.xpath("//div[@id='ow_Icon_State1']")).getText();
+		System.out.println("======ACW Code =======: " + acw);
+		Thread.sleep(800);
 	}
 
 	@And("^print to console$")
 	public void print() {
-		System.out.println("print");
+		System.out.println("======ACW Code =======");
 	}
 
 	@After
-	public void tearDown() {
-		// driver.quit();
+	public void tearDown() throws InterruptedException {
+		driver.findElement(By.xpath("//*[@id='ow_agent_dropdown_menu']/md-menu-button/button")).click();
+		Thread.sleep(700);
+		driver.findElement(By.xpath("//*[@id='ow_finish_work']")).click();
+		Thread.sleep(1500);
+		driver.findElement(By.xpath("//*[@id='ow_agent_dropdown_menu']/md-menu-button/button")).click();
+		Thread.sleep(700);
+		driver.findElement(By.xpath("//*[@id='ow_exit']")).click();
+		Thread.sleep(3000);
+		System.out.println("Complete");
+		driver.quit();
 	}
 
 	// DATA
@@ -189,24 +235,23 @@ public class EWCChat {
 		driver.switchTo().window(tabs.get(0));
 	}
 
-	public WebElement agentAccept(String cusEmail) throws InterruptedException {
+	public void agentAccept(String cusEmail) throws InterruptedException {
 		driver.switchTo().window(tabs.get(0));
-		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//card-group")));
-		Thread.sleep(2000);
-		List<WebElement> cardgroup = driver.findElements(By.xpath("//card-group"));
-		System.out.println("cardgroup.size(): " + cardgroup.size());
-		for (int i = 0; i <= cardgroup.size(); i++) {
-			WebElement curCard = cardgroup.get(i);
-			if (curCard.findElement(By.xpath("//bdi[@aria-label='" + cusEmail + "']")).getText().contains(cusEmail)) {
-				return curCard;
-			}
+		Thread.sleep(1000);
+		WebElement currEmailEl = null;
+		try {
+			explicitWait.until(
+					ExpectedConditions.visibilityOfElementLocated(By.xpath("//bdi[@aria-label='" + cusEmail + "']")));
+			currEmailEl = driver.findElement(By.xpath("//bdi[@aria-label='" + cusEmail + "']"));
+			currEmailEl.findElement(By.xpath("//*[@id='ow_card_accept_btn']")).click();
+		} catch (NoSuchElementException e) {
+			System.out.println("cannot find or accept " + cusEmail + " in wordcard");
 		}
-		System.out.println("agent cannot accept " + cusEmail);
-		return null;
+
 	}
 
-	public void currCusChat(String ewcid, String message) throws InterruptedException {
-		driver.switchTo().window(ewcid);
+	public void currCusChat(int posTab, String message) throws InterruptedException {
+		driver.switchTo().window(tabs.get(posTab));
 		Thread.sleep(1000);
 		WebDriverWait waits = new WebDriverWait(driver, 60);
 		waits.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='outmessage']")));
@@ -218,32 +263,52 @@ public class EWCChat {
 
 	public void currAgentChat(String chat, String cusEmail) throws InterruptedException {
 		driver.switchTo().window(tabs.get(0));
-		List<WebElement> cardgroup = driver.findElements(By.xpath("//card-group"));
-		System.out.println("cardgroup.size(): " + cardgroup.size());
-		for (int i = 0; i <= cardgroup.size(); i++) {
-			WebElement curCard = cardgroup.get(i);
-			WebElement emailEle = curCard.findElement(By.xpath("//bdi[@aria-label='" + cusEmail + "']"));
-			if (emailEle.getText().contains(cusEmail)) {
-				emailEle.click();
-				Thread.sleep(500);
-				break;
-			}
-		}
+		System.out.println("click to " + chat + " - " + cusEmail + ":: "
+				+ driver.findElement(By.xpath("//bdi[@aria-label='" + cusEmail + "']")).getText());
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//bdi[@aria-label='" + cusEmail + "']")).click();
+		driver.findElement(By.xpath("//bdi[@aria-label='" + cusEmail + "']")).click();
+		System.out.println("click to wordcard " + cusEmail);
 		Thread.sleep(1000);
 		List<WebElement> actions = driver.findElements(By.xpath("//div[@class='limited-input__container']/textarea"));
+		System.out.println("actions.size(): " + actions.size());
 		for (WebElement action : actions) {
 			if (action.isDisplayed()) {
 				action.sendKeys(chat);
+				System.out.println("send chat: " + chat);
 				action.sendKeys(Keys.ENTER);
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 				break;
 			}
 		}
 	}
 
+	public void swToWorkcard(String cusEmail) throws InterruptedException {
+		driver.switchTo().window(tabs.get(0));
+		System.out.println("click to " + cusEmail + " :: "
+				+ driver.findElement(By.xpath("//bdi[@aria-label='" + cusEmail + "']")).getText());
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//bdi[@aria-label='" + cusEmail + "']")).click();
+		Thread.sleep(500);
+		driver.findElement(By.xpath("//bdi[@aria-label='" + cusEmail + "']")).click();
+		System.out.println("click to wordcard " + cusEmail);
+		Thread.sleep(1000);
+	}
+
 	public static void Hover(WebDriver driver, WebElement element) {
 		Actions action = new Actions(driver);
 		action.moveToElement(element).build().perform();
+	}
+
+	public void goReady() throws InterruptedException {
+		try {
+			driver.findElement(By.xpath("//*[@id='ow_agent_dropdown_menu']/md-menu-button/button")).click();
+			Thread.sleep(500);
+			driver.findElement(By.xpath("//*[@id='ow_go_ready']")).click();
+			Thread.sleep(500);
+		} catch (NoSuchElementException e) {
+			System.out.println("Cannot go ready");
+		}
 	}
 }
 

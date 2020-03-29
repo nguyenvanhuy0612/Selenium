@@ -19,8 +19,12 @@ public class Tempp {
 		String webchatURL = "http://10.30.1.210:81/ewcsite%20-%20mcha576%20link/";
 		WebDriver driver = utilities.DriverFactory.CreateDriver("chrome");
 		driver.get(webchatURL);
-		System.out.println(driver.findElement(By.xpath("//div[contains(@id,'a')]")).getAttribute("class"));
-	
+		WebElement panel = driver.findElement(By.xpath("//*[@id='chatPanel']"));
+		// Su dung dau cham de di tiep trong WebElement.findElement
+//		//*[@id='chatPanel']/a  <=> //*[@id='chatPanel'] va ./a
+		System.out.println(panel.findElement(By.xpath("./a")).getAttribute("style"));
+		System.out.println(panel.findElement(By.xpath("./a")).getText());
+
 //		String currEWC = driver.getWindowHandle();
 //		System.out.println("currEWC: " + currEWC);
 //		driver.findElement(By.xpath("//body[1]")).sendKeys(Keys.CONTROL + "t");

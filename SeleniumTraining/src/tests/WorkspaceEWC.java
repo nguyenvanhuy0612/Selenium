@@ -242,4 +242,24 @@ public class WorkspaceEWC {
 			}
 		});
 	}
+//	public WebElement agentAccept(String cusEmail) throws InterruptedException {
+//		driver.switchTo().window(tabs.get(0));
+//		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//card-group")));
+//		Thread.sleep(2000);
+//		List<WebElement> cardgroup = driver.findElements(By.xpath("//card-group"));
+//		System.out.println("cardgroup.size(): " + cardgroup.size());
+//		for (int i = 0; i <= cardgroup.size(); i++) {
+//			WebElement curCard = cardgroup.get(i);
+//			try {
+//				WebElement currEmailEl = curCard.findElement(By.xpath("//bdi[@aria-label='" + cusEmail + "']"));
+//				if (currEmailEl.getText().contains(cusEmail)) {
+//					return curCard;
+//				}
+//			} catch (NoSuchElementException e) {
+//				System.out.println("cannot find " + cusEmail + " in wordcard " + i);
+//			}
+//		}
+//		System.out.println("agent cannot accept " + cusEmail);
+//		return cardgroup.get(0);
+//	}
 }
